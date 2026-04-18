@@ -14,12 +14,15 @@ leads_to:
   - docs/04-BEST-PRACTICES.md
   - docs/05-SUBMISSION-CHECKLIST.md
   - docs/06-UI-SYSTEM.md
-last_reviewed: 2026-04-17
+  - docs/07-IMPLEMENTATION-PLAN.md
+last_reviewed: 2026-04-18
 ---
 
 # 03 — Roadmap
 
 A day-by-day implementation plan. Each day produces something shippable or verifiable. If you only have 3 days instead of 6, merge Day 1+2 and Day 4+5 — never skip Day 0.
+
+> For a quality-gate view of the same work — with explicit Inputs → Tasks → Outputs → Verification → Gate at every step — see [`07-IMPLEMENTATION-PLAN.md`](07-IMPLEMENTATION-PLAN.md). The roadmap is calendar-driven; the implementation plan is gate-driven. Pick whichever framing keeps you more honest.
 
 ## Day 0 — Reconnaissance (2–3 hours, no code)
 

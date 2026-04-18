@@ -17,8 +17,9 @@ leads_to:
   - docs/04-BEST-PRACTICES.md
   - docs/05-SUBMISSION-CHECKLIST.md
   - docs/06-UI-SYSTEM.md
+  - docs/07-IMPLEMENTATION-PLAN.md
   - CLAUDE.md
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-18
 ---
 
 # Workiom — Flutter Sign-Up (Technical Test)
@@ -114,12 +115,13 @@ Each doc carries a YAML front matter block (`doc:`, `role:`, `audience:`, `prere
 | [`docs/03-ROADMAP.md`](docs/03-ROADMAP.md) | Day-by-day implementation plan (Day 0 recon → Day 6 ship) | 01, 02 |
 | [`docs/04-BEST-PRACTICES.md`](docs/04-BEST-PRACTICES.md) | Dependency pinning, analyzer config, BLoC rules | 01 |
 | [`docs/06-UI-SYSTEM.md`](docs/06-UI-SYSTEM.md) | Theme (light + dark), localization (EN + AR/RTL), SVG icon pipeline | 01 |
-| [`docs/05-SUBMISSION-CHECKLIST.md`](docs/05-SUBMISSION-CHECKLIST.md) | Final gate before emailing the APK; mirrors the PDF's own test criteria | 03, 04, 06 |
+| [`docs/07-IMPLEMENTATION-PLAN.md`](docs/07-IMPLEMENTATION-PLAN.md) | Phased build with explicit Inputs → Tasks → Outputs → Verification → Gate at every step | 03 |
+| [`docs/05-SUBMISSION-CHECKLIST.md`](docs/05-SUBMISSION-CHECKLIST.md) | Final gate before emailing the APK; mirrors the PDF's own test criteria | 03, 04, 06, 07 |
 
 ```
-README → 01-ARCHITECTURE → 02-API-REFERENCE → 03-ROADMAP ──┐
-      ↘         ↓                   ↓                      ↓
-      CLAUDE    04-BEST-PRACTICES   06-UI-SYSTEM           05-SUBMISSION-CHECKLIST
+README → 01-ARCHITECTURE → 02-API-REFERENCE → 03-ROADMAP → 07-IMPLEMENTATION-PLAN ──┐
+      ↘         ↓                   ↓                                               ↓
+      CLAUDE    04-BEST-PRACTICES   06-UI-SYSTEM                    05-SUBMISSION-CHECKLIST
 ```
 
 ## Build & submission

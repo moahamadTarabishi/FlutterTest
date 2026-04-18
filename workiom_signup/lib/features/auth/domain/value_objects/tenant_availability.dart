@@ -1,0 +1,1 @@
+enum TenantAvailabilityStatus { available, taken }

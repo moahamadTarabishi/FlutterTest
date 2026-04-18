@@ -1,0 +1,202 @@
+{
+  "@@locale": "en",
+
+  "appName": "Workiom",
+  "@appName": { "description": "Application name" },
+
+  "stayOrganized": "Stay organized with",
+  "@stayOrganized": {},
+
+  "continueWithGoogle": "Continue with Google",
+  "@continueWithGoogle": {},
+
+  "continueWithEmail": "Continue with email",
+  "@continueWithEmail": {},
+
+  "orDivider": "Or",
+  "@orDivider": {},
+
+  "signIn": "Sign in",
+  "@signIn": {},
+
+  "createFreeAccount": "Create your free account",
+  "@createFreeAccount": {},
+
+  "letsStartJourney": "Let's start an amazing journey! 👋",
+  "@letsStartJourney": {},
+
+  "bySigningUp": "By signing up, you agree",
+  "@bySigningUp": {},
+
+  "termsOfService": "Terms Of Service",
+  "@termsOfService": {},
+
+  "and": "And",
+  "@and": {},
+
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {},
+
+  "enterStrongPassword": "Enter a strong password",
+  "@enterStrongPassword": {},
+
+  "yourWorkEmail": "Your work email",
+  "@yourWorkEmail": {},
+
+  "yourPassword": "Your password",
+  "@yourPassword": {},
+
+  "confirmPassword": "Confirm password",
+  "@confirmPassword": {},
+
+  "passwordNotStrongEnough": "Not enough strong",
+  "@passwordNotStrongEnough": {},
+
+  "passwordStrong": "Strong password",
+  "@passwordStrong": {},
+
+  "passwordRuleMinLength": "Passwords must have at least {count} characters",
+  "@passwordRuleMinLength": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "passwordRuleUppercase": "Passwords must have at least one uppercase (A-Z).",
+  "@passwordRuleUppercase": {},
+
+  "passwordRuleLowercase": "Passwords must have at least one lowercase (a-z).",
+  "@passwordRuleLowercase": {},
+
+  "passwordRuleDigit": "Passwords must have at least one digit (0-9).",
+  "@passwordRuleDigit": {},
+
+  "passwordRuleSpecial": "Passwords must have at least one special character.",
+  "@passwordRuleSpecial": {},
+
+  "enterCompanyName": "Enter your company name",
+  "@enterCompanyName": {},
+
+  "yourCompanyOrTeamName": "Your company or team name",
+  "@yourCompanyOrTeamName": {},
+
+  "workspaceNameHint": "Workspace name*",
+  "@workspaceNameHint": {},
+
+  "yourFirstName": "Your first name",
+  "@yourFirstName": {},
+
+  "enterFirstName": "Enter your First name",
+  "@enterFirstName": {},
+
+  "yourLastName": "Your last name",
+  "@yourLastName": {},
+
+  "enterLastName": "Enter your Last name",
+  "@enterLastName": {},
+
+  "createWorkspace": "Create Workspace",
+  "@createWorkspace": {},
+
+  "thankYouForChoosing": "Thank you for choosing\nWorkiom",
+  "@thankYouForChoosing": {},
+
+  "english": "English",
+  "@english": {},
+
+  "errorNetwork": "No internet connection. Please try again.",
+  "@errorNetwork": {},
+
+  "errorTimeout": "Request timed out. Please try again.",
+  "@errorTimeout": {},
+
+  "errorServer": "Server error. Please try again later.",
+  "@errorServer": {},
+
+  "errorUnauthorized": "Session expired. Please sign in again.",
+  "@errorUnauthorized": {},
+
+  "errorUnknown": "Something went wrong. Please try again.",
+  "@errorUnknown": {},
+
+  "errorTenantTaken": "This workspace name is already taken. Please choose another.",
+  "@errorTenantTaken": {},
+
+  "errorInvalidCredentials": "Invalid email or password.",
+  "@errorInvalidCredentials": {},
+
+  "errorInvalidEmail": "Please enter a valid email address.",
+  "@errorInvalidEmail": {},
+
+  "errorEmptyField": "This field is required.",
+  "@errorEmptyField": {},
+
+  "errorLettersOnly": "Only letters are allowed.",
+  "@errorLettersOnly": {},
+
+  "errorTenantNameFormat": "Must start with a letter; only letters, numbers, and dashes.",
+  "@errorTenantNameFormat": {},
+
+  "errorTenantNameTooShort": "Workspace name must be at least 2 characters.",
+  "@errorTenantNameTooShort": {},
+
+  "tenantAvailableHint": "https://{name}.workiom.com/",
+  "@tenantAvailableHint": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+
+  "tenantChecking": "Checking availability...",
+  "@tenantChecking": {},
+
+  "tenantAvailable": "Available",
+  "@tenantAvailable": {},
+
+  "tenantTaken": "Already taken",
+  "@tenantTaken": {},
+
+  "retry": "Retry",
+  "@retry": {},
+
+  "back": "Back",
+  "@back": {},
+
+  "welcomeTitle": "Welcome to Workiom",
+  "@welcomeTitle": {},
+
+  "welcomeSubtitle": "The all-in-one platform to organize your work and collaborate with your team.",
+  "@welcomeSubtitle": {},
+
+  "loginSubtitle": "Enter your credentials to access your workspace.",
+  "@loginSubtitle": {},
+
+  "loginOutOfScope": "Login is out of scope for this demo.",
+  "@loginOutOfScope": {},
+
+  "nextStep": "Next",
+  "@nextStep": {},
+
+  "emailLabel": "Email",
+  "@emailLabel": {},
+
+  "passwordLabel": "Password",
+  "@passwordLabel": {},
+
+  "workspaceLabel": "Workspace URL",
+  "@workspaceLabel": {},
+
+  "firstNameLabel": "First name",
+  "@firstNameLabel": {},
+
+  "lastNameLabel": "Last name",
+  "@lastNameLabel": {},
+
+  "successTitle": "You're all set!",
+  "@successTitle": {},
+
+  "successSubtitle": "Your Workiom workspace is ready. Welcome aboard!",
+  "@successSubtitle": {},
+
+  "successWorkspace": "Your workspace",
+  "@successWorkspace": {},
+
+  "submitting": "Creating your workspace...",
+  "@submitting": {}
+}
