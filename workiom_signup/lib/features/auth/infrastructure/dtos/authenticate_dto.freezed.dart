@@ -15,8 +15,11 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthenticateRequestDto {
 
- String get userNameOrEmailAddress; String get password; String get tenancyName;// ianaTimeZone goes in body (different from RegisterTenant which uses ?timeZone= query param)
- String get ianaTimeZone; bool get rememberClient; String? get twoFactorVerificationCode; String? get captchaResponse; bool? get singleSignIn; String? get returnUrl;
+ String get userNameOrEmailAddress; String get password;// PDF spec: Authenticate body uses `tenantName`, unlike IsTenantAvailable
+// and RegisterTenant which both use `tenancyName`. Live API returns 401
+// when `tenancyName` is sent here.
+@JsonKey(name: 'tenantName') String get tenancyName;// ianaTimeZone goes in body (RegisterTenant uses ?timeZone= query param)
+ String get ianaTimeZone; bool get rememberClient; String? get twoFactorVerificationCode; String? get captchaResponse; bool get singleSignIn; String? get returnUrl;
 /// Create a copy of AuthenticateRequestDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +52,7 @@ abstract mixin class $AuthenticateRequestDtoCopyWith<$Res>  {
   factory $AuthenticateRequestDtoCopyWith(AuthenticateRequestDto value, $Res Function(AuthenticateRequestDto) _then) = _$AuthenticateRequestDtoCopyWithImpl;
 @useResult
 $Res call({
- String userNameOrEmailAddress, String password, String tenancyName, String ianaTimeZone, bool rememberClient, String? twoFactorVerificationCode, String? captchaResponse, bool? singleSignIn, String? returnUrl
+ String userNameOrEmailAddress, String password,@JsonKey(name: 'tenantName') String tenancyName, String ianaTimeZone, bool rememberClient, String? twoFactorVerificationCode, String? captchaResponse, bool singleSignIn, String? returnUrl
 });
 
 
@@ -66,7 +69,7 @@ class _$AuthenticateRequestDtoCopyWithImpl<$Res>
 
 /// Create a copy of AuthenticateRequestDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userNameOrEmailAddress = null,Object? password = null,Object? tenancyName = null,Object? ianaTimeZone = null,Object? rememberClient = null,Object? twoFactorVerificationCode = freezed,Object? captchaResponse = freezed,Object? singleSignIn = freezed,Object? returnUrl = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userNameOrEmailAddress = null,Object? password = null,Object? tenancyName = null,Object? ianaTimeZone = null,Object? rememberClient = null,Object? twoFactorVerificationCode = freezed,Object? captchaResponse = freezed,Object? singleSignIn = null,Object? returnUrl = freezed,}) {
   return _then(_self.copyWith(
 userNameOrEmailAddress: null == userNameOrEmailAddress ? _self.userNameOrEmailAddress : userNameOrEmailAddress // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
@@ -75,8 +78,8 @@ as String,ianaTimeZone: null == ianaTimeZone ? _self.ianaTimeZone : ianaTimeZone
 as String,rememberClient: null == rememberClient ? _self.rememberClient : rememberClient // ignore: cast_nullable_to_non_nullable
 as bool,twoFactorVerificationCode: freezed == twoFactorVerificationCode ? _self.twoFactorVerificationCode : twoFactorVerificationCode // ignore: cast_nullable_to_non_nullable
 as String?,captchaResponse: freezed == captchaResponse ? _self.captchaResponse : captchaResponse // ignore: cast_nullable_to_non_nullable
-as String?,singleSignIn: freezed == singleSignIn ? _self.singleSignIn : singleSignIn // ignore: cast_nullable_to_non_nullable
-as bool?,returnUrl: freezed == returnUrl ? _self.returnUrl : returnUrl // ignore: cast_nullable_to_non_nullable
+as String?,singleSignIn: null == singleSignIn ? _self.singleSignIn : singleSignIn // ignore: cast_nullable_to_non_nullable
+as bool,returnUrl: freezed == returnUrl ? _self.returnUrl : returnUrl // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -162,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userNameOrEmailAddress,  String password,  String tenancyName,  String ianaTimeZone,  bool rememberClient,  String? twoFactorVerificationCode,  String? captchaResponse,  bool? singleSignIn,  String? returnUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userNameOrEmailAddress,  String password, @JsonKey(name: 'tenantName')  String tenancyName,  String ianaTimeZone,  bool rememberClient,  String? twoFactorVerificationCode,  String? captchaResponse,  bool singleSignIn,  String? returnUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthenticateRequestDto() when $default != null:
 return $default(_that.userNameOrEmailAddress,_that.password,_that.tenancyName,_that.ianaTimeZone,_that.rememberClient,_that.twoFactorVerificationCode,_that.captchaResponse,_that.singleSignIn,_that.returnUrl);case _:
@@ -183,7 +186,7 @@ return $default(_that.userNameOrEmailAddress,_that.password,_that.tenancyName,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userNameOrEmailAddress,  String password,  String tenancyName,  String ianaTimeZone,  bool rememberClient,  String? twoFactorVerificationCode,  String? captchaResponse,  bool? singleSignIn,  String? returnUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userNameOrEmailAddress,  String password, @JsonKey(name: 'tenantName')  String tenancyName,  String ianaTimeZone,  bool rememberClient,  String? twoFactorVerificationCode,  String? captchaResponse,  bool singleSignIn,  String? returnUrl)  $default,) {final _that = this;
 switch (_that) {
 case _AuthenticateRequestDto():
 return $default(_that.userNameOrEmailAddress,_that.password,_that.tenancyName,_that.ianaTimeZone,_that.rememberClient,_that.twoFactorVerificationCode,_that.captchaResponse,_that.singleSignIn,_that.returnUrl);case _:
@@ -203,7 +206,7 @@ return $default(_that.userNameOrEmailAddress,_that.password,_that.tenancyName,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userNameOrEmailAddress,  String password,  String tenancyName,  String ianaTimeZone,  bool rememberClient,  String? twoFactorVerificationCode,  String? captchaResponse,  bool? singleSignIn,  String? returnUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userNameOrEmailAddress,  String password, @JsonKey(name: 'tenantName')  String tenancyName,  String ianaTimeZone,  bool rememberClient,  String? twoFactorVerificationCode,  String? captchaResponse,  bool singleSignIn,  String? returnUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthenticateRequestDto() when $default != null:
 return $default(_that.userNameOrEmailAddress,_that.password,_that.tenancyName,_that.ianaTimeZone,_that.rememberClient,_that.twoFactorVerificationCode,_that.captchaResponse,_that.singleSignIn,_that.returnUrl);case _:
@@ -218,18 +221,21 @@ return $default(_that.userNameOrEmailAddress,_that.password,_that.tenancyName,_t
 @JsonSerializable()
 
 class _AuthenticateRequestDto implements AuthenticateRequestDto {
-  const _AuthenticateRequestDto({required this.userNameOrEmailAddress, required this.password, required this.tenancyName, required this.ianaTimeZone, this.rememberClient = false, this.twoFactorVerificationCode, this.captchaResponse, this.singleSignIn, this.returnUrl});
+  const _AuthenticateRequestDto({required this.userNameOrEmailAddress, required this.password, @JsonKey(name: 'tenantName') required this.tenancyName, required this.ianaTimeZone, this.rememberClient = false, this.twoFactorVerificationCode, this.captchaResponse, this.singleSignIn = false, this.returnUrl});
   factory _AuthenticateRequestDto.fromJson(Map<String, dynamic> json) => _$AuthenticateRequestDtoFromJson(json);
 
 @override final  String userNameOrEmailAddress;
 @override final  String password;
-@override final  String tenancyName;
-// ianaTimeZone goes in body (different from RegisterTenant which uses ?timeZone= query param)
+// PDF spec: Authenticate body uses `tenantName`, unlike IsTenantAvailable
+// and RegisterTenant which both use `tenancyName`. Live API returns 401
+// when `tenancyName` is sent here.
+@override@JsonKey(name: 'tenantName') final  String tenancyName;
+// ianaTimeZone goes in body (RegisterTenant uses ?timeZone= query param)
 @override final  String ianaTimeZone;
 @override@JsonKey() final  bool rememberClient;
 @override final  String? twoFactorVerificationCode;
 @override final  String? captchaResponse;
-@override final  bool? singleSignIn;
+@override@JsonKey() final  bool singleSignIn;
 @override final  String? returnUrl;
 
 /// Create a copy of AuthenticateRequestDto
@@ -265,7 +271,7 @@ abstract mixin class _$AuthenticateRequestDtoCopyWith<$Res> implements $Authenti
   factory _$AuthenticateRequestDtoCopyWith(_AuthenticateRequestDto value, $Res Function(_AuthenticateRequestDto) _then) = __$AuthenticateRequestDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String userNameOrEmailAddress, String password, String tenancyName, String ianaTimeZone, bool rememberClient, String? twoFactorVerificationCode, String? captchaResponse, bool? singleSignIn, String? returnUrl
+ String userNameOrEmailAddress, String password,@JsonKey(name: 'tenantName') String tenancyName, String ianaTimeZone, bool rememberClient, String? twoFactorVerificationCode, String? captchaResponse, bool singleSignIn, String? returnUrl
 });
 
 
@@ -282,7 +288,7 @@ class __$AuthenticateRequestDtoCopyWithImpl<$Res>
 
 /// Create a copy of AuthenticateRequestDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userNameOrEmailAddress = null,Object? password = null,Object? tenancyName = null,Object? ianaTimeZone = null,Object? rememberClient = null,Object? twoFactorVerificationCode = freezed,Object? captchaResponse = freezed,Object? singleSignIn = freezed,Object? returnUrl = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userNameOrEmailAddress = null,Object? password = null,Object? tenancyName = null,Object? ianaTimeZone = null,Object? rememberClient = null,Object? twoFactorVerificationCode = freezed,Object? captchaResponse = freezed,Object? singleSignIn = null,Object? returnUrl = freezed,}) {
   return _then(_AuthenticateRequestDto(
 userNameOrEmailAddress: null == userNameOrEmailAddress ? _self.userNameOrEmailAddress : userNameOrEmailAddress // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
@@ -291,8 +297,8 @@ as String,ianaTimeZone: null == ianaTimeZone ? _self.ianaTimeZone : ianaTimeZone
 as String,rememberClient: null == rememberClient ? _self.rememberClient : rememberClient // ignore: cast_nullable_to_non_nullable
 as bool,twoFactorVerificationCode: freezed == twoFactorVerificationCode ? _self.twoFactorVerificationCode : twoFactorVerificationCode // ignore: cast_nullable_to_non_nullable
 as String?,captchaResponse: freezed == captchaResponse ? _self.captchaResponse : captchaResponse // ignore: cast_nullable_to_non_nullable
-as String?,singleSignIn: freezed == singleSignIn ? _self.singleSignIn : singleSignIn // ignore: cast_nullable_to_non_nullable
-as bool?,returnUrl: freezed == returnUrl ? _self.returnUrl : returnUrl // ignore: cast_nullable_to_non_nullable
+as String?,singleSignIn: null == singleSignIn ? _self.singleSignIn : singleSignIn // ignore: cast_nullable_to_non_nullable
+as bool,returnUrl: freezed == returnUrl ? _self.returnUrl : returnUrl // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

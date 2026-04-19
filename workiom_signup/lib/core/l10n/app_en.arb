@@ -22,7 +22,7 @@
   "createFreeAccount": "Create your free account",
   "@createFreeAccount": {},
 
-  "letsStartJourney": "Let's start an amazing journey! 👋",
+  "letsStartJourney": "Let's start an amazing journey!",
   "@letsStartJourney": {},
 
   "bySigningUp": "By signing up, you agree",
@@ -102,6 +102,9 @@
   "english": "English",
   "@english": {},
 
+  "arabic": "العربية",
+  "@arabic": {},
+
   "errorNetwork": "No internet connection. Please try again.",
   "@errorNetwork": {},
 
@@ -155,23 +158,8 @@
   "retry": "Retry",
   "@retry": {},
 
-  "back": "Back",
-  "@back": {},
-
-  "welcomeTitle": "Welcome to Workiom",
-  "@welcomeTitle": {},
-
-  "welcomeSubtitle": "The all-in-one platform to organize your work and collaborate with your team.",
-  "@welcomeSubtitle": {},
-
-  "loginSubtitle": "Enter your credentials to access your workspace.",
-  "@loginSubtitle": {},
-
   "loginOutOfScope": "Login is out of scope for this demo.",
   "@loginOutOfScope": {},
-
-  "nextStep": "Next",
-  "@nextStep": {},
 
   "emailLabel": "Email",
   "@emailLabel": {},
@@ -182,15 +170,6 @@
   "workspaceLabel": "Workspace URL",
   "@workspaceLabel": {},
 
-  "firstNameLabel": "First name",
-  "@firstNameLabel": {},
-
-  "lastNameLabel": "Last name",
-  "@lastNameLabel": {},
-
-  "successTitle": "You're all set!",
-  "@successTitle": {},
-
   "successSubtitle": "Your Workiom workspace is ready. Welcome aboard!",
   "@successSubtitle": {},
 
@@ -198,5 +177,14 @@
   "@successWorkspace": {},
 
   "submitting": "Creating your workspace...",
-  "@submitting": {}
+  "@submitting": {},
+
+  "errorLoadingConfig": "Unable to load configuration. Check your connection and try again.",
+  "@errorLoadingConfig": {},
+
+  "logout": "Log out",
+  "@logout": {},
+
+  "nameLabel": "Name",
+  "@nameLabel": {}
 }

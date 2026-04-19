@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:workiom_signup/core/gen/assets.gen.dart';
 import 'package:workiom_signup/core/l10n/generated/app_localizations.dart';
+import 'package:workiom_signup/core/theme/app_semantic_colors.dart';
+import 'package:workiom_signup/core/widgets/app_icon.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 
 class TenantAvailabilityIndicator extends StatelessWidget {
@@ -16,22 +19,23 @@ class TenantAvailabilityIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final cs = Theme.of(context).colorScheme;
+    final sem = Theme.of(context).extension<AppSemanticColors>()!;
     final tt = Theme.of(context).textTheme;
 
     return switch (availability) {
       TenantAvailability.unknown => const SizedBox.shrink(),
       TenantAvailability.checking => Row(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 14,
               width: 14,
-              child: CircularProgressIndicator(strokeWidth: 2),
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: cs.primary,
+              ),
             ),
             const SizedBox(width: 8),
-            Text(
-              l10n.tenantChecking,
-              style: tt.bodySmall?.copyWith(color: cs.onSurfaceVariant),
-            ),
+            Text(l10n.tenantChecking, style: tt.bodySmall),
           ],
         ),
       TenantAvailability.available => Column(
@@ -39,25 +43,28 @@ class TenantAvailabilityIndicator extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(Icons.check_circle, size: 16, color: cs.primary),
+                AppIcon(
+                  Assets.icons.icCheck,
+                  size: 16,
+                  color: sem.strengthStrong,
+                ),
                 const SizedBox(width: 8),
                 Text(
                   l10n.tenantAvailable,
-                  style:
-                      tt.bodySmall?.copyWith(color: cs.primary),
+                  style: tt.bodySmall?.copyWith(color: sem.strengthStrong),
                 ),
               ],
             ),
             const SizedBox(height: 4),
             Text(
               l10n.tenantAvailableHint(tenantName),
-              style: tt.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+              style: tt.bodySmall,
             ),
           ],
         ),
       TenantAvailability.taken => Row(
           children: [
-            Icon(Icons.cancel, size: 16, color: cs.error),
+            AppIcon(Assets.icons.icClose, size: 16, color: sem.ruleFailed),
             const SizedBox(width: 8),
             Text(
               l10n.tenantTaken,

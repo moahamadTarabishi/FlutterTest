@@ -43,8 +43,11 @@ class AuthRemoteDatasource {
       response.data!,
       (json) => PasswordPolicyResultDto.fromJson(json! as Map<String, dynamic>),
     );
-    return envelope.result ??
-        const PasswordPolicyResultDto(setting: PasswordPolicyDto());
+    final result = envelope.result;
+    if (result == null) {
+      throw StateError('GetPasswordComplexitySetting returned no result');
+    }
+    return result;
   }
 
   Future<TenantAvailabilityDto> isTenantAvailable(String tenancyName) async {
@@ -60,11 +63,12 @@ class AuthRemoteDatasource {
   }
 
   Future<RegisterTenantResponseDto> registerTenant(
-    RegisterTenantRequestDto request,
-  ) async {
+    RegisterTenantRequestDto request, {
+    required String timeZone,
+  }) async {
     final response = await _dio.post<Map<String, dynamic>>(
       ApiConstants.registerTenant,
-      queryParameters: {'timeZone': ApiConstants.ianaTimezone},
+      queryParameters: {'timeZone': timeZone},
       data: request.toJson(),
     );
     final envelope = AbpResponse<RegisterTenantResponseDto>.fromJson(

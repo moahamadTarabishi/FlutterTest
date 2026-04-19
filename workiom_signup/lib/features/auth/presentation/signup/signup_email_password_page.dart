@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workiom_signup/core/gen/assets.gen.dart';
 import 'package:workiom_signup/core/l10n/generated/app_localizations.dart';
+import 'package:workiom_signup/core/router/app_routes.dart';
+import 'package:workiom_signup/core/theme/app_semantic_colors.dart';
 import 'package:workiom_signup/core/utils/value_failures.dart';
+import 'package:workiom_signup/core/widgets/app_footer.dart';
+import 'package:workiom_signup/core/widgets/app_icon.dart';
 import 'package:workiom_signup/core/widgets/app_text_field.dart';
 import 'package:workiom_signup/core/widgets/primary_button.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/widgets/password_rules_list.dart';
+import 'package:workiom_signup/features/auth/presentation/signup/widgets/password_strength_bar.dart';
 
 class SignUpEmailPasswordPage extends StatefulWidget {
   const SignUpEmailPasswordPage({super.key});
@@ -17,14 +23,21 @@ class SignUpEmailPasswordPage extends StatefulWidget {
 }
 
 class _SignUpEmailPasswordPageState extends State<SignUpEmailPasswordPage> {
+  final _emailController = TextEditingController();
   String _rawPassword = '';
   bool _obscurePassword = true;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final cs = Theme.of(context).colorScheme;
-    final tt = Theme.of(context).textTheme;
+    final sem = Theme.of(context).extension<AppSemanticColors>()!;
 
     return BlocBuilder<SignUpBloc, SignUpState>(
       builder: (context, state) {
@@ -37,91 +50,157 @@ class _SignUpEmailPasswordPageState extends State<SignUpEmailPasswordPage> {
           },
           (_) => null,
         );
-        final passwordError = state.password.value.fold(
-          (f) => switch (f) {
-            ValueFailureWeakPassword() => l10n.passwordNotStrongEnough,
-            _ => null,
-          },
-          (_) => null,
-        );
         final canProceed = state.email.isValid && state.password.isValid;
 
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: cs.surface,
-            elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: cs.onSurface),
-              onPressed: () => context.go('/welcome'),
+              icon: AppIcon(Assets.icons.icChevronLeft, color: cs.primary),
+              onPressed: () => context.go(AppRoutes.welcome),
+              padding: EdgeInsets.zero,
+              alignment: Alignment.center,
             ),
           ),
           body: SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 24),
-                  Text(
-                    l10n.createFreeAccount,
-                    style: tt.headlineMedium?.copyWith(
-                      color: cs.onSurface,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    l10n.letsStartJourney,
-                    style: tt.bodyLarge
-                        ?.copyWith(color: cs.onSurfaceVariant),
-                  ),
-                  const SizedBox(height: 32),
-                  AppTextField(
-                    label: l10n.emailLabel,
-                    keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
-                    errorText: emailError,
-                    onChanged: (v) =>
-                        context.read<SignUpBloc>().add(SignUpEvent.emailChanged(v)),
-                  ),
-                  const SizedBox(height: 16),
-                  AppTextField(
-                    label: l10n.passwordLabel,
-                    obscureText: _obscurePassword,
-                    textInputAction: TextInputAction.done,
-                    errorText: passwordError,
-                    suffix: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: cs.onSurfaceVariant,
+            child: Column(
+              children: [
+                if (state.bootFailed)
+                  Material(
+                    color: cs.errorContainer,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
                       ),
-                      onPressed: () => setState(
-                        () => _obscurePassword = !_obscurePassword,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              l10n.errorLoadingConfig,
+                              style: TextStyle(color: cs.onErrorContainer),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => context
+                                .read<SignUpBloc>()
+                                .add(const SignUpEvent.started()),
+                            child: Text(
+                              l10n.retry,
+                              style: TextStyle(color: cs.onErrorContainer),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    onChanged: (v) {
-                      setState(() => _rawPassword = v);
-                      context
-                          .read<SignUpBloc>()
-                          .add(SignUpEvent.passwordChanged(v));
-                    },
                   ),
-                  if (policy != null) ...[
-                    const SizedBox(height: 12),
-                    PasswordRulesList(input: _rawPassword, policy: policy),
-                  ],
-                  const SizedBox(height: 32),
-                  PrimaryButton(
-                    label: l10n.nextStep,
-                    onPressed: canProceed
-                        ? () => context.go('/signup/tenant-name')
-                        : null,
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding:
+                        const EdgeInsetsDirectional.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 16),
+                        Text(l10n.enterStrongPassword,
+                            style: Theme.of(context).textTheme.headlineMedium),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(l10n.letsStartJourney,
+                                style: Theme.of(context).textTheme.titleLarge)
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                        AppTextField(
+                          label: l10n.yourWorkEmail,
+                          hintText: l10n.emailLabel,
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          prefixIcon: AppIcon(Assets.icons.icEmail, size: 16),
+                          controller: _emailController,
+                          errorText: emailError,
+                          suffix: IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            splashRadius: 20,
+                            icon: AppIcon(
+                              Assets.icons.icCloseCircle,
+                              size: 18,
+                              color: sem.textTertiary,
+                            ),
+                            onPressed: () {
+                              _emailController.clear();
+                              context
+                                  .read<SignUpBloc>()
+                                  .add(const SignUpEvent.emailChanged(''));
+                            },
+                          ),
+                          onChanged: (v) => context
+                              .read<SignUpBloc>()
+                              .add(SignUpEvent.emailChanged(v)),
+                        ),
+                        const SizedBox(height: 24),
+                        AppTextField(
+                          label: l10n.yourPassword,
+                          hintText: l10n.passwordLabel,
+                          obscureText: _obscurePassword,
+                          textInputAction: TextInputAction.done,
+                          prefixIcon: AppIcon(Assets.icons.icLock, size: 16),
+                          suffix: IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            splashRadius: 20,
+                            icon: AppIcon(
+                              _obscurePassword
+                                  ? Assets.icons.icEye
+                                  : Assets.icons.icEyeOff,
+                              size: 20,
+                              color: sem.textTertiary,
+                            ),
+                            onPressed: () => setState(
+                              () => _obscurePassword = !_obscurePassword,
+                            ),
+                          ),
+                          onChanged: (v) {
+                            setState(() => _rawPassword = v);
+                            context
+                                .read<SignUpBloc>()
+                                .add(SignUpEvent.passwordChanged(v));
+                          },
+                        ),
+                        if (policy != null) ...[
+                          const SizedBox(height: 30),
+                          PasswordStrengthBar(
+                              input: _rawPassword, policy: policy),
+                          const SizedBox(height: 8),
+                          PasswordRulesList(
+                              input: _rawPassword, policy: policy),
+                        ],
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 24),
-                ],
-              ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      PrimaryButton(
+                        label: l10n.confirmPassword,
+                        onPressed: canProceed
+                            ? () => context.go(AppRoutes.signupWorkspace)
+                            : null,
+                      ),
+                      const SizedBox(height: 16),
+                      const AppFooter(),
+                      const SizedBox(height: 16),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         );

@@ -20,6 +20,8 @@ abstract class SignUpState with _$SignUpState {
     @Default(TenantAvailability.unknown) TenantAvailability tenantAvailability,
     @Default(SubmissionStatus.idle) SubmissionStatus submissionStatus,
     @Default(null) AuthFailure? failure,
+    // Set when GetEditions or GetPasswordPolicy fails on startup.
+    @Default(false) bool bootFailed,
     // Populated after RegisterAndAuthenticate succeeds.
     @Default(null) UserSession? userSession,
   }) = _SignUpState;

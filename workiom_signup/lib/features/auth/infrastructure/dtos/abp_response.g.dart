@@ -10,8 +10,8 @@ _AbpResponse<T> _$AbpResponseFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) => _AbpResponse<T>(
-  result: _$nullableGenericFromJson(json['result'], fromJsonT),
   success: json['success'] as bool,
+  result: _$nullableGenericFromJson(json['result'], fromJsonT),
   error: json['error'] == null
       ? null
       : AbpError.fromJson(json['error'] as Map<String, dynamic>),
@@ -22,8 +22,8 @@ Map<String, dynamic> _$AbpResponseToJson<T>(
   _AbpResponse<T> instance,
   Object? Function(T value) toJsonT,
 ) => <String, dynamic>{
-  'result': _$nullableGenericToJson(instance.result, toJsonT),
   'success': instance.success,
+  'result': _$nullableGenericToJson(instance.result, toJsonT),
   'error': instance.error,
   'unAuthorizedRequest': instance.unauthorizedRequest,
 };

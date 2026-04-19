@@ -1,6 +1,5 @@
 abstract final class ApiConstants {
   static const baseUrl = 'https://api.workiom.club';
-  static const ianaTimezone = 'Europe/Istanbul';
 
   // Endpoints
   static const getCurrentLoginInformations =

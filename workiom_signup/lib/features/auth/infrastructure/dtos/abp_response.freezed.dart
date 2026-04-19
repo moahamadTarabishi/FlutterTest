@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AbpResponse<T> {
 
- T? get result; bool get success; AbpError? get error;@JsonKey(name: 'unAuthorizedRequest') bool get unauthorizedRequest;
+ bool get success; T? get result; AbpError? get error;@JsonKey(name: 'unAuthorizedRequest') bool get unauthorizedRequest;
 /// Create a copy of AbpResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AbpResponseCopyWith<T, AbpResponse<T>> get copyWith => _$AbpResponseCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AbpResponse<T>&&const DeepCollectionEquality().equals(other.result, result)&&(identical(other.success, success) || other.success == success)&&(identical(other.error, error) || other.error == error)&&(identical(other.unauthorizedRequest, unauthorizedRequest) || other.unauthorizedRequest == unauthorizedRequest));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AbpResponse<T>&&(identical(other.success, success) || other.success == success)&&const DeepCollectionEquality().equals(other.result, result)&&(identical(other.error, error) || other.error == error)&&(identical(other.unauthorizedRequest, unauthorizedRequest) || other.unauthorizedRequest == unauthorizedRequest));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(result),success,error,unauthorizedRequest);
+int get hashCode => Object.hash(runtimeType,success,const DeepCollectionEquality().hash(result),error,unauthorizedRequest);
 
 @override
 String toString() {
-  return 'AbpResponse<$T>(result: $result, success: $success, error: $error, unauthorizedRequest: $unauthorizedRequest)';
+  return 'AbpResponse<$T>(success: $success, result: $result, error: $error, unauthorizedRequest: $unauthorizedRequest)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AbpResponseCopyWith<T,$Res>  {
   factory $AbpResponseCopyWith(AbpResponse<T> value, $Res Function(AbpResponse<T>) _then) = _$AbpResponseCopyWithImpl;
 @useResult
 $Res call({
- T? result, bool success, AbpError? error,@JsonKey(name: 'unAuthorizedRequest') bool unauthorizedRequest
+ bool success, T? result, AbpError? error,@JsonKey(name: 'unAuthorizedRequest') bool unauthorizedRequest
 });
 
 
@@ -65,11 +65,11 @@ class _$AbpResponseCopyWithImpl<T,$Res>
 
 /// Create a copy of AbpResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? result = freezed,Object? success = null,Object? error = freezed,Object? unauthorizedRequest = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? success = null,Object? result = freezed,Object? error = freezed,Object? unauthorizedRequest = null,}) {
   return _then(_self.copyWith(
-result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
-as T?,success: null == success ? _self.success : success // ignore: cast_nullable_to_non_nullable
-as bool,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+success: null == success ? _self.success : success // ignore: cast_nullable_to_non_nullable
+as bool,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as T?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as AbpError?,unauthorizedRequest: null == unauthorizedRequest ? _self.unauthorizedRequest : unauthorizedRequest // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -165,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( T? result,  bool success,  AbpError? error, @JsonKey(name: 'unAuthorizedRequest')  bool unauthorizedRequest)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool success,  T? result,  AbpError? error, @JsonKey(name: 'unAuthorizedRequest')  bool unauthorizedRequest)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AbpResponse() when $default != null:
-return $default(_that.result,_that.success,_that.error,_that.unauthorizedRequest);case _:
+return $default(_that.success,_that.result,_that.error,_that.unauthorizedRequest);case _:
   return orElse();
 
 }
@@ -186,10 +186,10 @@ return $default(_that.result,_that.success,_that.error,_that.unauthorizedRequest
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( T? result,  bool success,  AbpError? error, @JsonKey(name: 'unAuthorizedRequest')  bool unauthorizedRequest)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool success,  T? result,  AbpError? error, @JsonKey(name: 'unAuthorizedRequest')  bool unauthorizedRequest)  $default,) {final _that = this;
 switch (_that) {
 case _AbpResponse():
-return $default(_that.result,_that.success,_that.error,_that.unauthorizedRequest);}
+return $default(_that.success,_that.result,_that.error,_that.unauthorizedRequest);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -203,10 +203,10 @@ return $default(_that.result,_that.success,_that.error,_that.unauthorizedRequest
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( T? result,  bool success,  AbpError? error, @JsonKey(name: 'unAuthorizedRequest')  bool unauthorizedRequest)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool success,  T? result,  AbpError? error, @JsonKey(name: 'unAuthorizedRequest')  bool unauthorizedRequest)?  $default,) {final _that = this;
 switch (_that) {
 case _AbpResponse() when $default != null:
-return $default(_that.result,_that.success,_that.error,_that.unauthorizedRequest);case _:
+return $default(_that.success,_that.result,_that.error,_that.unauthorizedRequest);case _:
   return null;
 
 }
@@ -218,11 +218,11 @@ return $default(_that.result,_that.success,_that.error,_that.unauthorizedRequest
 @JsonSerializable(genericArgumentFactories: true)
 
 class _AbpResponse<T> implements AbpResponse<T> {
-  const _AbpResponse({this.result, required this.success, this.error, @JsonKey(name: 'unAuthorizedRequest') this.unauthorizedRequest = false});
+  const _AbpResponse({required this.success, this.result, this.error, @JsonKey(name: 'unAuthorizedRequest') this.unauthorizedRequest = false});
   factory _AbpResponse.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$AbpResponseFromJson(json,fromJsonT);
 
-@override final  T? result;
 @override final  bool success;
+@override final  T? result;
 @override final  AbpError? error;
 @override@JsonKey(name: 'unAuthorizedRequest') final  bool unauthorizedRequest;
 
@@ -239,16 +239,16 @@ Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AbpResponse<T>&&const DeepCollectionEquality().equals(other.result, result)&&(identical(other.success, success) || other.success == success)&&(identical(other.error, error) || other.error == error)&&(identical(other.unauthorizedRequest, unauthorizedRequest) || other.unauthorizedRequest == unauthorizedRequest));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AbpResponse<T>&&(identical(other.success, success) || other.success == success)&&const DeepCollectionEquality().equals(other.result, result)&&(identical(other.error, error) || other.error == error)&&(identical(other.unauthorizedRequest, unauthorizedRequest) || other.unauthorizedRequest == unauthorizedRequest));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(result),success,error,unauthorizedRequest);
+int get hashCode => Object.hash(runtimeType,success,const DeepCollectionEquality().hash(result),error,unauthorizedRequest);
 
 @override
 String toString() {
-  return 'AbpResponse<$T>(result: $result, success: $success, error: $error, unauthorizedRequest: $unauthorizedRequest)';
+  return 'AbpResponse<$T>(success: $success, result: $result, error: $error, unauthorizedRequest: $unauthorizedRequest)';
 }
 
 
@@ -259,7 +259,7 @@ abstract mixin class _$AbpResponseCopyWith<T,$Res> implements $AbpResponseCopyWi
   factory _$AbpResponseCopyWith(_AbpResponse<T> value, $Res Function(_AbpResponse<T>) _then) = __$AbpResponseCopyWithImpl;
 @override @useResult
 $Res call({
- T? result, bool success, AbpError? error,@JsonKey(name: 'unAuthorizedRequest') bool unauthorizedRequest
+ bool success, T? result, AbpError? error,@JsonKey(name: 'unAuthorizedRequest') bool unauthorizedRequest
 });
 
 
@@ -276,11 +276,11 @@ class __$AbpResponseCopyWithImpl<T,$Res>
 
 /// Create a copy of AbpResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? result = freezed,Object? success = null,Object? error = freezed,Object? unauthorizedRequest = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? success = null,Object? result = freezed,Object? error = freezed,Object? unauthorizedRequest = null,}) {
   return _then(_AbpResponse<T>(
-result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
-as T?,success: null == success ? _self.success : success // ignore: cast_nullable_to_non_nullable
-as bool,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+success: null == success ? _self.success : success // ignore: cast_nullable_to_non_nullable
+as bool,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as T?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as AbpError?,unauthorizedRequest: null == unauthorizedRequest ? _self.unauthorizedRequest : unauthorizedRequest // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

@@ -18,5 +18,7 @@ abstract class TenantAvailabilityDto with _$TenantAvailabilityDto {
 extension TenantAvailabilityDtoMapper on TenantAvailabilityDto {
   // Per PDF: tenantId == null means available, regardless of state value.
   TenantAvailabilityStatus toDomain() =>
-      tenantId == null ? TenantAvailabilityStatus.available : TenantAvailabilityStatus.taken;
+      tenantId == null
+          ? TenantAvailabilityStatus.available
+          : TenantAvailabilityStatus.taken;
 }

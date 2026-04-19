@@ -1,29 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workiom_signup/core/di/injection.dart';
+import 'package:workiom_signup/core/router/app_routes.dart';
 import 'package:workiom_signup/features/auth/presentation/login/login_page.dart';
-import 'package:workiom_signup/features/auth/presentation/personal_info/personal_info_page.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/signup_email_password_page.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/signup_success_page.dart';
-import 'package:workiom_signup/features/auth/presentation/signup/signup_tenant_name_page.dart';
+import 'package:workiom_signup/features/auth/presentation/signup/signup_workspace_page.dart';
 import 'package:workiom_signup/features/auth/presentation/splash/splash_page.dart';
 import 'package:workiom_signup/features/auth/presentation/welcome/welcome_page.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: AppRoutes.splash,
   routes: [
     GoRoute(
-      path: '/splash',
-      builder: (_, __) => const SplashPage(),
+      path: AppRoutes.splash,
+      builder: (_, _) => const SplashPage(),
     ),
     GoRoute(
-      path: '/welcome',
-      builder: (_, __) => const WelcomePage(),
+      path: AppRoutes.welcome,
+      builder: (_, _) => const WelcomePage(),
     ),
     GoRoute(
-      path: '/login',
-      builder: (_, __) => const LoginPage(),
+      path: AppRoutes.login,
+      builder: (_, _) => const LoginPage(),
     ),
     // ShellRoute: same SignUpBloc instance across all /signup/* children.
     ShellRoute(
@@ -33,20 +33,16 @@ final appRouter = GoRouter(
       ),
       routes: [
         GoRoute(
-          path: '/signup/email-password',
-          builder: (_, __) => const SignUpEmailPasswordPage(),
+          path: AppRoutes.signupEmailPassword,
+          builder: (_, _) => const SignUpEmailPasswordPage(),
         ),
         GoRoute(
-          path: '/signup/tenant-name',
-          builder: (_, __) => const SignUpTenantNamePage(),
+          path: AppRoutes.signupWorkspace,
+          builder: (_, _) => const SignUpWorkspacePage(),
         ),
         GoRoute(
-          path: '/signup/personal-info',
-          builder: (_, __) => const PersonalInfoPage(),
-        ),
-        GoRoute(
-          path: '/signup/success',
-          builder: (_, __) => const SignUpSuccessPage(),
+          path: AppRoutes.signupSuccess,
+          builder: (_, _) => const SignUpSuccessPage(),
         ),
       ],
     ),

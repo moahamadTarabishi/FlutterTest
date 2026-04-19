@@ -17,12 +17,13 @@ class AppIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tintColor = color ?? Theme.of(context).colorScheme.onSurface;
     return SvgPicture.asset(
       assetPath,
       width: size,
       height: size,
-      colorFilter: ColorFilter.mode(tintColor, BlendMode.srcIn),
+      colorFilter: color != null
+          ? ColorFilter.mode(color!, BlendMode.srcIn)
+          : null,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: semanticsLabel == null,
     );

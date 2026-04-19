@@ -28,15 +28,15 @@ class Password extends ValueObject<String> {
 
   static bool passes(String input, PasswordPolicy policy) {
     if (input.length < policy.requiredLength) return false;
-    if (policy.requireUppercase && !input.contains(RegExp(r'[A-Z]'))) {
+    if (policy.requireUppercase && !input.contains(RegExp('[A-Z]'))) {
       return false;
     }
-    if (policy.requireLowercase && !input.contains(RegExp(r'[a-z]'))) {
+    if (policy.requireLowercase && !input.contains(RegExp('[a-z]'))) {
       return false;
     }
-    if (policy.requireDigit && !input.contains(RegExp(r'[0-9]'))) return false;
+    if (policy.requireDigit && !input.contains(RegExp('[0-9]'))) return false;
     if (policy.requireNonAlphanumeric &&
-        !input.contains(RegExp(r'[^A-Za-z0-9]'))) {
+        !input.contains(RegExp('[^A-Za-z0-9]'))) {
       return false;
     }
     return true;
@@ -51,13 +51,13 @@ class Password extends ValueObject<String> {
         if (policy.requiredLength > 0)
           PasswordRule.minLength: input.length >= policy.requiredLength,
         if (policy.requireUppercase)
-          PasswordRule.uppercase: input.contains(RegExp(r'[A-Z]')),
+          PasswordRule.uppercase: input.contains(RegExp('[A-Z]')),
         if (policy.requireLowercase)
-          PasswordRule.lowercase: input.contains(RegExp(r'[a-z]')),
+          PasswordRule.lowercase: input.contains(RegExp('[a-z]')),
         if (policy.requireDigit)
-          PasswordRule.digit: input.contains(RegExp(r'[0-9]')),
+          PasswordRule.digit: input.contains(RegExp('[0-9]')),
         if (policy.requireNonAlphanumeric)
-          PasswordRule.special: input.contains(RegExp(r'[^A-Za-z0-9]')),
+          PasswordRule.special: input.contains(RegExp('[^A-Za-z0-9]')),
       };
 }
 

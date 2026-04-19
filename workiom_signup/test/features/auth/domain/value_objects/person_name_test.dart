@@ -23,7 +23,7 @@ void main() {
       expect(PersonName('Jean-Luc').isValid, isFalse);
     });
 
-    test("apostrophe rejected", () {
+    test('apostrophe rejected', () {
       expect(PersonName("O'Brien").isValid, isFalse);
     });
 

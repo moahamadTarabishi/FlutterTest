@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createFreeAccount => 'Create your free account';
 
   @override
-  String get letsStartJourney => 'Let\'s start an amazing journey! 👋';
+  String get letsStartJourney => 'Let\'s start an amazing journey!';
 
   @override
   String get bySigningUp => 'By signing up, you agree';
@@ -114,6 +114,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get english => 'English';
 
   @override
+  String get arabic => 'العربية';
+
+  @override
   String get errorNetwork => 'No internet connection. Please try again.';
 
   @override
@@ -170,24 +173,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Retry';
 
   @override
-  String get back => 'Back';
-
-  @override
-  String get welcomeTitle => 'Welcome to Workiom';
-
-  @override
-  String get welcomeSubtitle =>
-      'The all-in-one platform to organize your work and collaborate with your team.';
-
-  @override
-  String get loginSubtitle =>
-      'Enter your credentials to access your workspace.';
-
-  @override
   String get loginOutOfScope => 'Login is out of scope for this demo.';
-
-  @override
-  String get nextStep => 'Next';
 
   @override
   String get emailLabel => 'Email';
@@ -199,15 +185,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workspaceLabel => 'Workspace URL';
 
   @override
-  String get firstNameLabel => 'First name';
-
-  @override
-  String get lastNameLabel => 'Last name';
-
-  @override
-  String get successTitle => 'You\'re all set!';
-
-  @override
   String get successSubtitle =>
       'Your Workiom workspace is ready. Welcome aboard!';
 
@@ -216,4 +193,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submitting => 'Creating your workspace...';
+
+  @override
+  String get errorLoadingConfig =>
+      'Unable to load configuration. Check your connection and try again.';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get nameLabel => 'Name';
 }

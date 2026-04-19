@@ -9,13 +9,16 @@ abstract class AuthenticateRequestDto with _$AuthenticateRequestDto {
   const factory AuthenticateRequestDto({
     required String userNameOrEmailAddress,
     required String password,
-    required String tenancyName,
-    // ianaTimeZone goes in body (different from RegisterTenant which uses ?timeZone= query param)
+    // PDF spec: Authenticate body uses `tenantName`, unlike IsTenantAvailable
+    // and RegisterTenant which both use `tenancyName`. Live API returns 401
+    // when `tenancyName` is sent here.
+    @JsonKey(name: 'tenantName') required String tenancyName,
+    // ianaTimeZone goes in body (RegisterTenant uses ?timeZone= query param)
     required String ianaTimeZone,
     @Default(false) bool rememberClient,
     String? twoFactorVerificationCode,
     String? captchaResponse,
-    bool? singleSignIn,
+    @Default(false) bool singleSignIn,
     String? returnUrl,
   }) = _AuthenticateRequestDto;
 

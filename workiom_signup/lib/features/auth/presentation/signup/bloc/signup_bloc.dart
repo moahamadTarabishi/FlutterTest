@@ -59,16 +59,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final editionsResult = await _getEditions();
     final policyResult = await _getPasswordPolicy();
 
-    List<Edition> editions = const [];
+    var editions = const <Edition>[];
     PasswordPolicy? policy;
+    var bootFailed = false;
 
     editionsResult.fold(
-      (_) {},
-      (List<Edition> list) => editions = list,
+      (_) => bootFailed = true,
+      (list) => editions = list,
     );
     policyResult.fold(
-      (_) {},
-      (PasswordPolicy p) => policy = p,
+      (_) => bootFailed = true,
+      (p) => policy = p,
     );
 
     emit(
@@ -76,6 +77,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         editions: editions,
         passwordPolicy: policy,
         selectedEditionId: editions.isNotEmpty ? editions.first.id : null,
+        bootFailed: bootFailed,
       ),
     );
   }
@@ -113,7 +115,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(tenantAvailability: TenantAvailability.checking));
     final result = await _checkTenantAvailable(name);
     result.fold(
-      (_) => emit(state.copyWith(tenantAvailability: TenantAvailability.unknown)),
+      (_) => emit(
+        state.copyWith(tenantAvailability: TenantAvailability.unknown),
+      ),
       (status) => emit(
         state.copyWith(
           tenantAvailability: status == TenantAvailabilityStatus.available

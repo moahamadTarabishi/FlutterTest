@@ -296,6 +296,12 @@ abstract class AppLocalizations {
   /// **'English'**
   String get english;
 
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'العربية'**
+  String get arabic;
+
   /// No description provided for @errorNetwork.
   ///
   /// In en, this message translates to:
@@ -487,6 +493,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Creating your workspace...'**
   String get submitting;
+
+  /// No description provided for @errorLoadingConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load configuration. Check your connection and try again.'**
+  String get errorLoadingConfig;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logout;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
 }
 
 class _AppLocalizationsDelegate

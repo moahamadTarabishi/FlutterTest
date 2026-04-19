@@ -10,6 +10,8 @@ abstract class RegisterTenantRequestDto with _$RegisterTenantRequestDto {
     required String tenancyName,
     required String name,
     required String adminEmailAddress,
+    required String adminFirstName,
+    required String adminLastName,
     required String adminPassword,
     required int editionId,
     // Must be present and null — ABP rejects the request if omitted entirely.

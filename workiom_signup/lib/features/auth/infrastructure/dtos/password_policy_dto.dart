@@ -17,11 +17,11 @@ abstract class PasswordPolicyResultDto with _$PasswordPolicyResultDto {
 @freezed
 abstract class PasswordPolicyDto with _$PasswordPolicyDto {
   const factory PasswordPolicyDto({
-    @Default(false) bool requireDigit,
-    @Default(false) bool requireLowercase,
-    @Default(false) bool requireNonAlphanumeric,
-    @Default(false) bool requireUppercase,
-    @Default(8) int requiredLength,
+    required bool requireDigit,
+    required bool requireLowercase,
+    required bool requireNonAlphanumeric,
+    required bool requireUppercase,
+    required int requiredLength,
   }) = _PasswordPolicyDto;
 
   factory PasswordPolicyDto.fromJson(Map<String, dynamic> json) =>

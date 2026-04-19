@@ -670,7 +670,8 @@ String toString() {
 /// @nodoc
 mixin _$SignUpState {
 
- List<Edition> get editions; PasswordPolicy? get passwordPolicy; int? get selectedEditionId; EmailAddress get email; Password get password; TenantName get tenantName; PersonName get firstName; PersonName get lastName; TenantAvailability get tenantAvailability; SubmissionStatus get submissionStatus; AuthFailure? get failure;// Populated after RegisterAndAuthenticate succeeds.
+ List<Edition> get editions; PasswordPolicy? get passwordPolicy; int? get selectedEditionId; EmailAddress get email; Password get password; TenantName get tenantName; PersonName get firstName; PersonName get lastName; TenantAvailability get tenantAvailability; SubmissionStatus get submissionStatus; AuthFailure? get failure;// Set when GetEditions or GetPasswordPolicy fails on startup.
+ bool get bootFailed;// Populated after RegisterAndAuthenticate succeeds.
  UserSession? get userSession;
 /// Create a copy of SignUpState
 /// with the given fields replaced by the non-null parameter values.
@@ -682,16 +683,16 @@ $SignUpStateCopyWith<SignUpState> get copyWith => _$SignUpStateCopyWithImpl<Sign
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpState&&const DeepCollectionEquality().equals(other.editions, editions)&&(identical(other.passwordPolicy, passwordPolicy) || other.passwordPolicy == passwordPolicy)&&(identical(other.selectedEditionId, selectedEditionId) || other.selectedEditionId == selectedEditionId)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.tenantName, tenantName) || other.tenantName == tenantName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.tenantAvailability, tenantAvailability) || other.tenantAvailability == tenantAvailability)&&(identical(other.submissionStatus, submissionStatus) || other.submissionStatus == submissionStatus)&&(identical(other.failure, failure) || other.failure == failure)&&(identical(other.userSession, userSession) || other.userSession == userSession));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpState&&const DeepCollectionEquality().equals(other.editions, editions)&&(identical(other.passwordPolicy, passwordPolicy) || other.passwordPolicy == passwordPolicy)&&(identical(other.selectedEditionId, selectedEditionId) || other.selectedEditionId == selectedEditionId)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.tenantName, tenantName) || other.tenantName == tenantName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.tenantAvailability, tenantAvailability) || other.tenantAvailability == tenantAvailability)&&(identical(other.submissionStatus, submissionStatus) || other.submissionStatus == submissionStatus)&&(identical(other.failure, failure) || other.failure == failure)&&(identical(other.bootFailed, bootFailed) || other.bootFailed == bootFailed)&&(identical(other.userSession, userSession) || other.userSession == userSession));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(editions),passwordPolicy,selectedEditionId,email,password,tenantName,firstName,lastName,tenantAvailability,submissionStatus,failure,userSession);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(editions),passwordPolicy,selectedEditionId,email,password,tenantName,firstName,lastName,tenantAvailability,submissionStatus,failure,bootFailed,userSession);
 
 @override
 String toString() {
-  return 'SignUpState(editions: $editions, passwordPolicy: $passwordPolicy, selectedEditionId: $selectedEditionId, email: $email, password: $password, tenantName: $tenantName, firstName: $firstName, lastName: $lastName, tenantAvailability: $tenantAvailability, submissionStatus: $submissionStatus, failure: $failure, userSession: $userSession)';
+  return 'SignUpState(editions: $editions, passwordPolicy: $passwordPolicy, selectedEditionId: $selectedEditionId, email: $email, password: $password, tenantName: $tenantName, firstName: $firstName, lastName: $lastName, tenantAvailability: $tenantAvailability, submissionStatus: $submissionStatus, failure: $failure, bootFailed: $bootFailed, userSession: $userSession)';
 }
 
 
@@ -702,7 +703,7 @@ abstract mixin class $SignUpStateCopyWith<$Res>  {
   factory $SignUpStateCopyWith(SignUpState value, $Res Function(SignUpState) _then) = _$SignUpStateCopyWithImpl;
 @useResult
 $Res call({
- List<Edition> editions, PasswordPolicy? passwordPolicy, int? selectedEditionId, EmailAddress email, Password password, TenantName tenantName, PersonName firstName, PersonName lastName, TenantAvailability tenantAvailability, SubmissionStatus submissionStatus, AuthFailure? failure, UserSession? userSession
+ List<Edition> editions, PasswordPolicy? passwordPolicy, int? selectedEditionId, EmailAddress email, Password password, TenantName tenantName, PersonName firstName, PersonName lastName, TenantAvailability tenantAvailability, SubmissionStatus submissionStatus, AuthFailure? failure, bool bootFailed, UserSession? userSession
 });
 
 
@@ -719,7 +720,7 @@ class _$SignUpStateCopyWithImpl<$Res>
 
 /// Create a copy of SignUpState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? editions = null,Object? passwordPolicy = freezed,Object? selectedEditionId = freezed,Object? email = null,Object? password = null,Object? tenantName = null,Object? firstName = null,Object? lastName = null,Object? tenantAvailability = null,Object? submissionStatus = null,Object? failure = freezed,Object? userSession = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? editions = null,Object? passwordPolicy = freezed,Object? selectedEditionId = freezed,Object? email = null,Object? password = null,Object? tenantName = null,Object? firstName = null,Object? lastName = null,Object? tenantAvailability = null,Object? submissionStatus = null,Object? failure = freezed,Object? bootFailed = null,Object? userSession = freezed,}) {
   return _then(_self.copyWith(
 editions: null == editions ? _self.editions : editions // ignore: cast_nullable_to_non_nullable
 as List<Edition>,passwordPolicy: freezed == passwordPolicy ? _self.passwordPolicy : passwordPolicy // ignore: cast_nullable_to_non_nullable
@@ -732,7 +733,8 @@ as PersonName,lastName: null == lastName ? _self.lastName : lastName // ignore: 
 as PersonName,tenantAvailability: null == tenantAvailability ? _self.tenantAvailability : tenantAvailability // ignore: cast_nullable_to_non_nullable
 as TenantAvailability,submissionStatus: null == submissionStatus ? _self.submissionStatus : submissionStatus // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
-as AuthFailure?,userSession: freezed == userSession ? _self.userSession : userSession // ignore: cast_nullable_to_non_nullable
+as AuthFailure?,bootFailed: null == bootFailed ? _self.bootFailed : bootFailed // ignore: cast_nullable_to_non_nullable
+as bool,userSession: freezed == userSession ? _self.userSession : userSession // ignore: cast_nullable_to_non_nullable
 as UserSession?,
   ));
 }
@@ -854,10 +856,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Edition> editions,  PasswordPolicy? passwordPolicy,  int? selectedEditionId,  EmailAddress email,  Password password,  TenantName tenantName,  PersonName firstName,  PersonName lastName,  TenantAvailability tenantAvailability,  SubmissionStatus submissionStatus,  AuthFailure? failure,  UserSession? userSession)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Edition> editions,  PasswordPolicy? passwordPolicy,  int? selectedEditionId,  EmailAddress email,  Password password,  TenantName tenantName,  PersonName firstName,  PersonName lastName,  TenantAvailability tenantAvailability,  SubmissionStatus submissionStatus,  AuthFailure? failure,  bool bootFailed,  UserSession? userSession)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignUpState() when $default != null:
-return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_that.email,_that.password,_that.tenantName,_that.firstName,_that.lastName,_that.tenantAvailability,_that.submissionStatus,_that.failure,_that.userSession);case _:
+return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_that.email,_that.password,_that.tenantName,_that.firstName,_that.lastName,_that.tenantAvailability,_that.submissionStatus,_that.failure,_that.bootFailed,_that.userSession);case _:
   return orElse();
 
 }
@@ -875,10 +877,10 @@ return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Edition> editions,  PasswordPolicy? passwordPolicy,  int? selectedEditionId,  EmailAddress email,  Password password,  TenantName tenantName,  PersonName firstName,  PersonName lastName,  TenantAvailability tenantAvailability,  SubmissionStatus submissionStatus,  AuthFailure? failure,  UserSession? userSession)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Edition> editions,  PasswordPolicy? passwordPolicy,  int? selectedEditionId,  EmailAddress email,  Password password,  TenantName tenantName,  PersonName firstName,  PersonName lastName,  TenantAvailability tenantAvailability,  SubmissionStatus submissionStatus,  AuthFailure? failure,  bool bootFailed,  UserSession? userSession)  $default,) {final _that = this;
 switch (_that) {
 case _SignUpState():
-return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_that.email,_that.password,_that.tenantName,_that.firstName,_that.lastName,_that.tenantAvailability,_that.submissionStatus,_that.failure,_that.userSession);case _:
+return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_that.email,_that.password,_that.tenantName,_that.firstName,_that.lastName,_that.tenantAvailability,_that.submissionStatus,_that.failure,_that.bootFailed,_that.userSession);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -895,10 +897,10 @@ return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Edition> editions,  PasswordPolicy? passwordPolicy,  int? selectedEditionId,  EmailAddress email,  Password password,  TenantName tenantName,  PersonName firstName,  PersonName lastName,  TenantAvailability tenantAvailability,  SubmissionStatus submissionStatus,  AuthFailure? failure,  UserSession? userSession)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Edition> editions,  PasswordPolicy? passwordPolicy,  int? selectedEditionId,  EmailAddress email,  Password password,  TenantName tenantName,  PersonName firstName,  PersonName lastName,  TenantAvailability tenantAvailability,  SubmissionStatus submissionStatus,  AuthFailure? failure,  bool bootFailed,  UserSession? userSession)?  $default,) {final _that = this;
 switch (_that) {
 case _SignUpState() when $default != null:
-return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_that.email,_that.password,_that.tenantName,_that.firstName,_that.lastName,_that.tenantAvailability,_that.submissionStatus,_that.failure,_that.userSession);case _:
+return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_that.email,_that.password,_that.tenantName,_that.firstName,_that.lastName,_that.tenantAvailability,_that.submissionStatus,_that.failure,_that.bootFailed,_that.userSession);case _:
   return null;
 
 }
@@ -910,7 +912,7 @@ return $default(_that.editions,_that.passwordPolicy,_that.selectedEditionId,_tha
 
 
 class _SignUpState implements SignUpState {
-  const _SignUpState({final  List<Edition> editions = const [], this.passwordPolicy = null, this.selectedEditionId = null, this.email = const EmailAddress.pure(), this.password = const Password.pure(), this.tenantName = const TenantName.pure(), this.firstName = const PersonName.pure(), this.lastName = const PersonName.pure(), this.tenantAvailability = TenantAvailability.unknown, this.submissionStatus = SubmissionStatus.idle, this.failure = null, this.userSession = null}): _editions = editions;
+  const _SignUpState({final  List<Edition> editions = const [], this.passwordPolicy = null, this.selectedEditionId = null, this.email = const EmailAddress.pure(), this.password = const Password.pure(), this.tenantName = const TenantName.pure(), this.firstName = const PersonName.pure(), this.lastName = const PersonName.pure(), this.tenantAvailability = TenantAvailability.unknown, this.submissionStatus = SubmissionStatus.idle, this.failure = null, this.bootFailed = false, this.userSession = null}): _editions = editions;
   
 
  final  List<Edition> _editions;
@@ -930,6 +932,8 @@ class _SignUpState implements SignUpState {
 @override@JsonKey() final  TenantAvailability tenantAvailability;
 @override@JsonKey() final  SubmissionStatus submissionStatus;
 @override@JsonKey() final  AuthFailure? failure;
+// Set when GetEditions or GetPasswordPolicy fails on startup.
+@override@JsonKey() final  bool bootFailed;
 // Populated after RegisterAndAuthenticate succeeds.
 @override@JsonKey() final  UserSession? userSession;
 
@@ -943,16 +947,16 @@ _$SignUpStateCopyWith<_SignUpState> get copyWith => __$SignUpStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpState&&const DeepCollectionEquality().equals(other._editions, _editions)&&(identical(other.passwordPolicy, passwordPolicy) || other.passwordPolicy == passwordPolicy)&&(identical(other.selectedEditionId, selectedEditionId) || other.selectedEditionId == selectedEditionId)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.tenantName, tenantName) || other.tenantName == tenantName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.tenantAvailability, tenantAvailability) || other.tenantAvailability == tenantAvailability)&&(identical(other.submissionStatus, submissionStatus) || other.submissionStatus == submissionStatus)&&(identical(other.failure, failure) || other.failure == failure)&&(identical(other.userSession, userSession) || other.userSession == userSession));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpState&&const DeepCollectionEquality().equals(other._editions, _editions)&&(identical(other.passwordPolicy, passwordPolicy) || other.passwordPolicy == passwordPolicy)&&(identical(other.selectedEditionId, selectedEditionId) || other.selectedEditionId == selectedEditionId)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.tenantName, tenantName) || other.tenantName == tenantName)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.tenantAvailability, tenantAvailability) || other.tenantAvailability == tenantAvailability)&&(identical(other.submissionStatus, submissionStatus) || other.submissionStatus == submissionStatus)&&(identical(other.failure, failure) || other.failure == failure)&&(identical(other.bootFailed, bootFailed) || other.bootFailed == bootFailed)&&(identical(other.userSession, userSession) || other.userSession == userSession));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_editions),passwordPolicy,selectedEditionId,email,password,tenantName,firstName,lastName,tenantAvailability,submissionStatus,failure,userSession);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_editions),passwordPolicy,selectedEditionId,email,password,tenantName,firstName,lastName,tenantAvailability,submissionStatus,failure,bootFailed,userSession);
 
 @override
 String toString() {
-  return 'SignUpState(editions: $editions, passwordPolicy: $passwordPolicy, selectedEditionId: $selectedEditionId, email: $email, password: $password, tenantName: $tenantName, firstName: $firstName, lastName: $lastName, tenantAvailability: $tenantAvailability, submissionStatus: $submissionStatus, failure: $failure, userSession: $userSession)';
+  return 'SignUpState(editions: $editions, passwordPolicy: $passwordPolicy, selectedEditionId: $selectedEditionId, email: $email, password: $password, tenantName: $tenantName, firstName: $firstName, lastName: $lastName, tenantAvailability: $tenantAvailability, submissionStatus: $submissionStatus, failure: $failure, bootFailed: $bootFailed, userSession: $userSession)';
 }
 
 
@@ -963,7 +967,7 @@ abstract mixin class _$SignUpStateCopyWith<$Res> implements $SignUpStateCopyWith
   factory _$SignUpStateCopyWith(_SignUpState value, $Res Function(_SignUpState) _then) = __$SignUpStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Edition> editions, PasswordPolicy? passwordPolicy, int? selectedEditionId, EmailAddress email, Password password, TenantName tenantName, PersonName firstName, PersonName lastName, TenantAvailability tenantAvailability, SubmissionStatus submissionStatus, AuthFailure? failure, UserSession? userSession
+ List<Edition> editions, PasswordPolicy? passwordPolicy, int? selectedEditionId, EmailAddress email, Password password, TenantName tenantName, PersonName firstName, PersonName lastName, TenantAvailability tenantAvailability, SubmissionStatus submissionStatus, AuthFailure? failure, bool bootFailed, UserSession? userSession
 });
 
 
@@ -980,7 +984,7 @@ class __$SignUpStateCopyWithImpl<$Res>
 
 /// Create a copy of SignUpState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? editions = null,Object? passwordPolicy = freezed,Object? selectedEditionId = freezed,Object? email = null,Object? password = null,Object? tenantName = null,Object? firstName = null,Object? lastName = null,Object? tenantAvailability = null,Object? submissionStatus = null,Object? failure = freezed,Object? userSession = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? editions = null,Object? passwordPolicy = freezed,Object? selectedEditionId = freezed,Object? email = null,Object? password = null,Object? tenantName = null,Object? firstName = null,Object? lastName = null,Object? tenantAvailability = null,Object? submissionStatus = null,Object? failure = freezed,Object? bootFailed = null,Object? userSession = freezed,}) {
   return _then(_SignUpState(
 editions: null == editions ? _self._editions : editions // ignore: cast_nullable_to_non_nullable
 as List<Edition>,passwordPolicy: freezed == passwordPolicy ? _self.passwordPolicy : passwordPolicy // ignore: cast_nullable_to_non_nullable
@@ -993,7 +997,8 @@ as PersonName,lastName: null == lastName ? _self.lastName : lastName // ignore: 
 as PersonName,tenantAvailability: null == tenantAvailability ? _self.tenantAvailability : tenantAvailability // ignore: cast_nullable_to_non_nullable
 as TenantAvailability,submissionStatus: null == submissionStatus ? _self.submissionStatus : submissionStatus // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
-as AuthFailure?,userSession: freezed == userSession ? _self.userSession : userSession // ignore: cast_nullable_to_non_nullable
+as AuthFailure?,bootFailed: null == bootFailed ? _self.bootFailed : bootFailed // ignore: cast_nullable_to_non_nullable
+as bool,userSession: freezed == userSession ? _self.userSession : userSession // ignore: cast_nullable_to_non_nullable
 as UserSession?,
   ));
 }

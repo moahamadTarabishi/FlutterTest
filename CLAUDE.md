@@ -128,7 +128,7 @@ BLoC instances are provided via `BlocProvider` in the router's `builder`, not re
 ### Navigation
 `go_router` with a `ShellRoute` wrapper for the entire `/signup/*` sub-tree. The shell provides a single `SignUpBloc` instance that persists across all four sign-up pages — do not break this pattern or state will be lost on navigation.
 
-Route table: `/splash` → `/welcome` → `/signup/email-password` → `/signup/tenant-name` → `/signup/personal-info` → `/signup/success`. `/login` is a stub (out of scope).
+Route table: `/splash` → `/welcome` → `/signup/email-password` → `/signup/workspace` → `/signup/success`. `/login` is a stub (out of scope).
 
 ### Networking
 Dio client at `core/network/dio_client.dart`. Three interceptors applied in order:

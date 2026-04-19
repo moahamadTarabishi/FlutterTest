@@ -30,7 +30,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get createFreeAccount => 'أنشئ حسابك المجاني';
 
   @override
-  String get letsStartJourney => 'لنبدأ رحلة رائعة! 👋';
+  String get letsStartJourney => 'لنبدأ رحلة رائعة!';
 
   @override
   String get bySigningUp => 'بالتسجيل، توافق على';
@@ -112,6 +112,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get english => 'English';
 
   @override
+  String get arabic => 'العربية';
+
+  @override
   String get errorNetwork => 'لا يوجد اتصال بالإنترنت. يرجى المحاولة مرة أخرى.';
 
   @override
@@ -169,22 +172,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get retry => 'إعادة المحاولة';
 
   @override
-  String get back => 'رجوع';
-
-  @override
-  String get welcomeTitle => 'مرحبًا بك في ووركيوم';
-
-  @override
-  String get welcomeSubtitle => 'المنصة الشاملة لتنظيم عملك والتعاون مع فريقك.';
-
-  @override
-  String get loginSubtitle => 'أدخل بيانات اعتمادك للوصول إلى مساحة عملك.';
-
-  @override
   String get loginOutOfScope => 'تسجيل الدخول خارج نطاق هذا العرض التوضيحي.';
-
-  @override
-  String get nextStep => 'التالي';
 
   @override
   String get emailLabel => 'البريد الإلكتروني';
@@ -196,15 +184,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get workspaceLabel => 'رابط مساحة العمل';
 
   @override
-  String get firstNameLabel => 'الاسم الأول';
-
-  @override
-  String get lastNameLabel => 'اسم العائلة';
-
-  @override
-  String get successTitle => 'أنت جاهز!';
-
-  @override
   String get successSubtitle =>
       'مساحة عمل ووركيوم الخاصة بك جاهزة. أهلًا وسهلًا!';
 
@@ -213,4 +192,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get submitting => 'جارٍ إنشاء مساحة العمل...';
+
+  @override
+  String get errorLoadingConfig =>
+      'تعذّر تحميل الإعدادات. تحقق من اتصالك وأعد المحاولة.';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get nameLabel => 'الاسم';
 }

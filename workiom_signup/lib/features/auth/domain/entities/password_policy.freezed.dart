@@ -210,14 +210,14 @@ return $default(_that.requiredLength,_that.requireUppercase,_that.requireLowerca
 
 
 class _PasswordPolicy implements PasswordPolicy {
-  const _PasswordPolicy({this.requiredLength = 8, this.requireUppercase = false, this.requireLowercase = false, this.requireDigit = false, this.requireNonAlphanumeric = false});
+  const _PasswordPolicy({required this.requiredLength, required this.requireUppercase, required this.requireLowercase, required this.requireDigit, required this.requireNonAlphanumeric});
   
 
-@override@JsonKey() final  int requiredLength;
-@override@JsonKey() final  bool requireUppercase;
-@override@JsonKey() final  bool requireLowercase;
-@override@JsonKey() final  bool requireDigit;
-@override@JsonKey() final  bool requireNonAlphanumeric;
+@override final  int requiredLength;
+@override final  bool requireUppercase;
+@override final  bool requireLowercase;
+@override final  bool requireDigit;
+@override final  bool requireNonAlphanumeric;
 
 /// Create a copy of PasswordPolicy
 /// with the given fields replaced by the non-null parameter values.

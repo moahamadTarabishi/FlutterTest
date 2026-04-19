@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:workiom_signup/core/constants/api_constants.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:workiom_signup/core/error/failures.dart';
 import 'package:workiom_signup/core/storage/secure_storage.dart';
 import 'package:workiom_signup/features/auth/domain/entities/auth_token.dart';
@@ -85,15 +85,21 @@ class AuthRepositoryImpl implements AuthRepository {
     required int editionId,
   }) =>
       _run(() async {
+        final slug = tenantName.getOrCrash();
         final request = RegisterTenantRequestDto(
-          tenancyName: tenantName.getOrCrash(),
-          name: '${firstName.getOrCrash()} ${lastName.getOrCrash()}',
+          tenancyName: slug,
+          name: slug,
           adminEmailAddress: email.getOrCrash(),
+          adminFirstName: firstName.getOrCrash(),
+          adminLastName: lastName.getOrCrash(),
           adminPassword: password.getOrCrash(),
           editionId: editionId,
-          captchaResponse: null,
         );
-        final dto = await _datasource.registerTenant(request);
+        final timeZone = await FlutterTimezone.getLocalTimezone();
+        final dto = await _datasource.registerTenant(
+          request,
+          timeZone: timeZone,
+        );
         return dto.toDomain();
       });
 
@@ -104,13 +110,12 @@ class AuthRepositoryImpl implements AuthRepository {
     required TenantName tenancyName,
   }) =>
       _run(() async {
+        final timeZone = await FlutterTimezone.getLocalTimezone();
         final request = AuthenticateRequestDto(
           userNameOrEmailAddress: email.getOrCrash(),
           password: password.getOrCrash(),
           tenancyName: tenancyName.getOrCrash(),
-          ianaTimeZone: ApiConstants.ianaTimezone,
-          rememberClient: false,
-          captchaResponse: null,
+          ianaTimeZone: timeZone,
         );
         final dto = await _datasource.authenticate(request);
         final token = dto.toDomain();
@@ -120,8 +125,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return token;
       });
 
-  /// Wraps async DTO calls and maps [DioException.error] (a [Failure] placed
-  /// there by [ErrorInterceptor]) into the appropriate [AuthFailure].
+  /// Wraps async DTO calls and maps DioException into the appropriate
+  /// [AuthFailure].
   Future<Either<AuthFailure, T>> _run<T>(
     Future<T> Function() action,
   ) async {
@@ -129,7 +134,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return right(await action());
     } on DioException catch (e) {
       return left(_mapDioException(e));
-    } catch (_) {
+    } on Object catch (_) {
       return left(const AuthFailure.generic(Failure.unknown()));
     }
   }
@@ -151,7 +156,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
       final validationErrors = failure.validationErrors;
       if (validationErrors != null && validationErrors.isNotEmpty) {
-        // Flatten Map<String, List<String>> → Map<String, String> (first error per field).
+        // Flatten → first error per field.
         return AuthFailure.validation({
           for (final entry in validationErrors.entries)
             entry.key: entry.value.first,

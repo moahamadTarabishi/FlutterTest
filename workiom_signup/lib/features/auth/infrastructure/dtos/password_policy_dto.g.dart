@@ -18,11 +18,11 @@ Map<String, dynamic> _$PasswordPolicyResultDtoToJson(
 
 _PasswordPolicyDto _$PasswordPolicyDtoFromJson(Map<String, dynamic> json) =>
     _PasswordPolicyDto(
-      requireDigit: json['requireDigit'] as bool? ?? false,
-      requireLowercase: json['requireLowercase'] as bool? ?? false,
-      requireNonAlphanumeric: json['requireNonAlphanumeric'] as bool? ?? false,
-      requireUppercase: json['requireUppercase'] as bool? ?? false,
-      requiredLength: (json['requiredLength'] as num?)?.toInt() ?? 8,
+      requireDigit: json['requireDigit'] as bool,
+      requireLowercase: json['requireLowercase'] as bool,
+      requireNonAlphanumeric: json['requireNonAlphanumeric'] as bool,
+      requireUppercase: json['requireUppercase'] as bool,
+      requiredLength: (json['requiredLength'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PasswordPolicyDtoToJson(_PasswordPolicyDto instance) =>

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegisterTenantRequestDto {
 
- String get tenancyName; String get name; String get adminEmailAddress; String get adminPassword; int get editionId;// Must be present and null — ABP rejects the request if omitted entirely.
+ String get tenancyName; String get name; String get adminEmailAddress; String get adminFirstName; String get adminLastName; String get adminPassword; int get editionId;// Must be present and null — ABP rejects the request if omitted entirely.
  String? get captchaResponse;
 /// Create a copy of RegisterTenantRequestDto
 /// with the given fields replaced by the non-null parameter values.
@@ -29,16 +29,16 @@ $RegisterTenantRequestDtoCopyWith<RegisterTenantRequestDto> get copyWith => _$Re
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterTenantRequestDto&&(identical(other.tenancyName, tenancyName) || other.tenancyName == tenancyName)&&(identical(other.name, name) || other.name == name)&&(identical(other.adminEmailAddress, adminEmailAddress) || other.adminEmailAddress == adminEmailAddress)&&(identical(other.adminPassword, adminPassword) || other.adminPassword == adminPassword)&&(identical(other.editionId, editionId) || other.editionId == editionId)&&(identical(other.captchaResponse, captchaResponse) || other.captchaResponse == captchaResponse));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterTenantRequestDto&&(identical(other.tenancyName, tenancyName) || other.tenancyName == tenancyName)&&(identical(other.name, name) || other.name == name)&&(identical(other.adminEmailAddress, adminEmailAddress) || other.adminEmailAddress == adminEmailAddress)&&(identical(other.adminFirstName, adminFirstName) || other.adminFirstName == adminFirstName)&&(identical(other.adminLastName, adminLastName) || other.adminLastName == adminLastName)&&(identical(other.adminPassword, adminPassword) || other.adminPassword == adminPassword)&&(identical(other.editionId, editionId) || other.editionId == editionId)&&(identical(other.captchaResponse, captchaResponse) || other.captchaResponse == captchaResponse));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,tenancyName,name,adminEmailAddress,adminPassword,editionId,captchaResponse);
+int get hashCode => Object.hash(runtimeType,tenancyName,name,adminEmailAddress,adminFirstName,adminLastName,adminPassword,editionId,captchaResponse);
 
 @override
 String toString() {
-  return 'RegisterTenantRequestDto(tenancyName: $tenancyName, name: $name, adminEmailAddress: $adminEmailAddress, adminPassword: $adminPassword, editionId: $editionId, captchaResponse: $captchaResponse)';
+  return 'RegisterTenantRequestDto(tenancyName: $tenancyName, name: $name, adminEmailAddress: $adminEmailAddress, adminFirstName: $adminFirstName, adminLastName: $adminLastName, adminPassword: $adminPassword, editionId: $editionId, captchaResponse: $captchaResponse)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $RegisterTenantRequestDtoCopyWith<$Res>  {
   factory $RegisterTenantRequestDtoCopyWith(RegisterTenantRequestDto value, $Res Function(RegisterTenantRequestDto) _then) = _$RegisterTenantRequestDtoCopyWithImpl;
 @useResult
 $Res call({
- String tenancyName, String name, String adminEmailAddress, String adminPassword, int editionId, String? captchaResponse
+ String tenancyName, String name, String adminEmailAddress, String adminFirstName, String adminLastName, String adminPassword, int editionId, String? captchaResponse
 });
 
 
@@ -66,11 +66,13 @@ class _$RegisterTenantRequestDtoCopyWithImpl<$Res>
 
 /// Create a copy of RegisterTenantRequestDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? tenancyName = null,Object? name = null,Object? adminEmailAddress = null,Object? adminPassword = null,Object? editionId = null,Object? captchaResponse = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? tenancyName = null,Object? name = null,Object? adminEmailAddress = null,Object? adminFirstName = null,Object? adminLastName = null,Object? adminPassword = null,Object? editionId = null,Object? captchaResponse = freezed,}) {
   return _then(_self.copyWith(
 tenancyName: null == tenancyName ? _self.tenancyName : tenancyName // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,adminEmailAddress: null == adminEmailAddress ? _self.adminEmailAddress : adminEmailAddress // ignore: cast_nullable_to_non_nullable
+as String,adminFirstName: null == adminFirstName ? _self.adminFirstName : adminFirstName // ignore: cast_nullable_to_non_nullable
+as String,adminLastName: null == adminLastName ? _self.adminLastName : adminLastName // ignore: cast_nullable_to_non_nullable
 as String,adminPassword: null == adminPassword ? _self.adminPassword : adminPassword // ignore: cast_nullable_to_non_nullable
 as String,editionId: null == editionId ? _self.editionId : editionId // ignore: cast_nullable_to_non_nullable
 as int,captchaResponse: freezed == captchaResponse ? _self.captchaResponse : captchaResponse // ignore: cast_nullable_to_non_nullable
@@ -159,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tenancyName,  String name,  String adminEmailAddress,  String adminPassword,  int editionId,  String? captchaResponse)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tenancyName,  String name,  String adminEmailAddress,  String adminFirstName,  String adminLastName,  String adminPassword,  int editionId,  String? captchaResponse)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RegisterTenantRequestDto() when $default != null:
-return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.adminPassword,_that.editionId,_that.captchaResponse);case _:
+return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.adminFirstName,_that.adminLastName,_that.adminPassword,_that.editionId,_that.captchaResponse);case _:
   return orElse();
 
 }
@@ -180,10 +182,10 @@ return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.admin
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tenancyName,  String name,  String adminEmailAddress,  String adminPassword,  int editionId,  String? captchaResponse)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tenancyName,  String name,  String adminEmailAddress,  String adminFirstName,  String adminLastName,  String adminPassword,  int editionId,  String? captchaResponse)  $default,) {final _that = this;
 switch (_that) {
 case _RegisterTenantRequestDto():
-return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.adminPassword,_that.editionId,_that.captchaResponse);case _:
+return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.adminFirstName,_that.adminLastName,_that.adminPassword,_that.editionId,_that.captchaResponse);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +202,10 @@ return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.admin
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tenancyName,  String name,  String adminEmailAddress,  String adminPassword,  int editionId,  String? captchaResponse)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tenancyName,  String name,  String adminEmailAddress,  String adminFirstName,  String adminLastName,  String adminPassword,  int editionId,  String? captchaResponse)?  $default,) {final _that = this;
 switch (_that) {
 case _RegisterTenantRequestDto() when $default != null:
-return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.adminPassword,_that.editionId,_that.captchaResponse);case _:
+return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.adminFirstName,_that.adminLastName,_that.adminPassword,_that.editionId,_that.captchaResponse);case _:
   return null;
 
 }
@@ -215,12 +217,14 @@ return $default(_that.tenancyName,_that.name,_that.adminEmailAddress,_that.admin
 @JsonSerializable()
 
 class _RegisterTenantRequestDto implements RegisterTenantRequestDto {
-  const _RegisterTenantRequestDto({required this.tenancyName, required this.name, required this.adminEmailAddress, required this.adminPassword, required this.editionId, this.captchaResponse});
+  const _RegisterTenantRequestDto({required this.tenancyName, required this.name, required this.adminEmailAddress, required this.adminFirstName, required this.adminLastName, required this.adminPassword, required this.editionId, this.captchaResponse});
   factory _RegisterTenantRequestDto.fromJson(Map<String, dynamic> json) => _$RegisterTenantRequestDtoFromJson(json);
 
 @override final  String tenancyName;
 @override final  String name;
 @override final  String adminEmailAddress;
+@override final  String adminFirstName;
+@override final  String adminLastName;
 @override final  String adminPassword;
 @override final  int editionId;
 // Must be present and null — ABP rejects the request if omitted entirely.
@@ -239,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterTenantRequestDto&&(identical(other.tenancyName, tenancyName) || other.tenancyName == tenancyName)&&(identical(other.name, name) || other.name == name)&&(identical(other.adminEmailAddress, adminEmailAddress) || other.adminEmailAddress == adminEmailAddress)&&(identical(other.adminPassword, adminPassword) || other.adminPassword == adminPassword)&&(identical(other.editionId, editionId) || other.editionId == editionId)&&(identical(other.captchaResponse, captchaResponse) || other.captchaResponse == captchaResponse));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterTenantRequestDto&&(identical(other.tenancyName, tenancyName) || other.tenancyName == tenancyName)&&(identical(other.name, name) || other.name == name)&&(identical(other.adminEmailAddress, adminEmailAddress) || other.adminEmailAddress == adminEmailAddress)&&(identical(other.adminFirstName, adminFirstName) || other.adminFirstName == adminFirstName)&&(identical(other.adminLastName, adminLastName) || other.adminLastName == adminLastName)&&(identical(other.adminPassword, adminPassword) || other.adminPassword == adminPassword)&&(identical(other.editionId, editionId) || other.editionId == editionId)&&(identical(other.captchaResponse, captchaResponse) || other.captchaResponse == captchaResponse));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,tenancyName,name,adminEmailAddress,adminPassword,editionId,captchaResponse);
+int get hashCode => Object.hash(runtimeType,tenancyName,name,adminEmailAddress,adminFirstName,adminLastName,adminPassword,editionId,captchaResponse);
 
 @override
 String toString() {
-  return 'RegisterTenantRequestDto(tenancyName: $tenancyName, name: $name, adminEmailAddress: $adminEmailAddress, adminPassword: $adminPassword, editionId: $editionId, captchaResponse: $captchaResponse)';
+  return 'RegisterTenantRequestDto(tenancyName: $tenancyName, name: $name, adminEmailAddress: $adminEmailAddress, adminFirstName: $adminFirstName, adminLastName: $adminLastName, adminPassword: $adminPassword, editionId: $editionId, captchaResponse: $captchaResponse)';
 }
 
 
@@ -259,7 +263,7 @@ abstract mixin class _$RegisterTenantRequestDtoCopyWith<$Res> implements $Regist
   factory _$RegisterTenantRequestDtoCopyWith(_RegisterTenantRequestDto value, $Res Function(_RegisterTenantRequestDto) _then) = __$RegisterTenantRequestDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String tenancyName, String name, String adminEmailAddress, String adminPassword, int editionId, String? captchaResponse
+ String tenancyName, String name, String adminEmailAddress, String adminFirstName, String adminLastName, String adminPassword, int editionId, String? captchaResponse
 });
 
 
@@ -276,11 +280,13 @@ class __$RegisterTenantRequestDtoCopyWithImpl<$Res>
 
 /// Create a copy of RegisterTenantRequestDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? tenancyName = null,Object? name = null,Object? adminEmailAddress = null,Object? adminPassword = null,Object? editionId = null,Object? captchaResponse = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? tenancyName = null,Object? name = null,Object? adminEmailAddress = null,Object? adminFirstName = null,Object? adminLastName = null,Object? adminPassword = null,Object? editionId = null,Object? captchaResponse = freezed,}) {
   return _then(_RegisterTenantRequestDto(
 tenancyName: null == tenancyName ? _self.tenancyName : tenancyName // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,adminEmailAddress: null == adminEmailAddress ? _self.adminEmailAddress : adminEmailAddress // ignore: cast_nullable_to_non_nullable
+as String,adminFirstName: null == adminFirstName ? _self.adminFirstName : adminFirstName // ignore: cast_nullable_to_non_nullable
+as String,adminLastName: null == adminLastName ? _self.adminLastName : adminLastName // ignore: cast_nullable_to_non_nullable
 as String,adminPassword: null == adminPassword ? _self.adminPassword : adminPassword // ignore: cast_nullable_to_non_nullable
 as String,editionId: null == editionId ? _self.editionId : editionId // ignore: cast_nullable_to_non_nullable
 as int,captchaResponse: freezed == captchaResponse ? _self.captchaResponse : captchaResponse // ignore: cast_nullable_to_non_nullable

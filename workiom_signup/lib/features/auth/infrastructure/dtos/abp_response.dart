@@ -6,8 +6,8 @@ part 'abp_response.g.dart';
 @Freezed(genericArgumentFactories: true)
 sealed class AbpResponse<T> with _$AbpResponse<T> {
   const factory AbpResponse({
-    T? result,
     required bool success,
+    T? result,
     AbpError? error,
     @JsonKey(name: 'unAuthorizedRequest')
     @Default(false)

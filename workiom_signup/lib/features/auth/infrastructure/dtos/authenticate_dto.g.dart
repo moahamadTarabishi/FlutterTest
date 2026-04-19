@@ -11,12 +11,12 @@ _AuthenticateRequestDto _$AuthenticateRequestDtoFromJson(
 ) => _AuthenticateRequestDto(
   userNameOrEmailAddress: json['userNameOrEmailAddress'] as String,
   password: json['password'] as String,
-  tenancyName: json['tenancyName'] as String,
+  tenancyName: json['tenantName'] as String,
   ianaTimeZone: json['ianaTimeZone'] as String,
   rememberClient: json['rememberClient'] as bool? ?? false,
   twoFactorVerificationCode: json['twoFactorVerificationCode'] as String?,
   captchaResponse: json['captchaResponse'] as String?,
-  singleSignIn: json['singleSignIn'] as bool?,
+  singleSignIn: json['singleSignIn'] as bool? ?? false,
   returnUrl: json['returnUrl'] as String?,
 );
 
@@ -25,7 +25,7 @@ Map<String, dynamic> _$AuthenticateRequestDtoToJson(
 ) => <String, dynamic>{
   'userNameOrEmailAddress': instance.userNameOrEmailAddress,
   'password': instance.password,
-  'tenancyName': instance.tenancyName,
+  'tenantName': instance.tenancyName,
   'ianaTimeZone': instance.ianaTimeZone,
   'rememberClient': instance.rememberClient,
   'twoFactorVerificationCode': instance.twoFactorVerificationCode,

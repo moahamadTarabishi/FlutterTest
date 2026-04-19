@@ -494,14 +494,14 @@ return $default(_that.requireDigit,_that.requireLowercase,_that.requireNonAlphan
 @JsonSerializable()
 
 class _PasswordPolicyDto implements PasswordPolicyDto {
-  const _PasswordPolicyDto({this.requireDigit = false, this.requireLowercase = false, this.requireNonAlphanumeric = false, this.requireUppercase = false, this.requiredLength = 8});
+  const _PasswordPolicyDto({required this.requireDigit, required this.requireLowercase, required this.requireNonAlphanumeric, required this.requireUppercase, required this.requiredLength});
   factory _PasswordPolicyDto.fromJson(Map<String, dynamic> json) => _$PasswordPolicyDtoFromJson(json);
 
-@override@JsonKey() final  bool requireDigit;
-@override@JsonKey() final  bool requireLowercase;
-@override@JsonKey() final  bool requireNonAlphanumeric;
-@override@JsonKey() final  bool requireUppercase;
-@override@JsonKey() final  int requiredLength;
+@override final  bool requireDigit;
+@override final  bool requireLowercase;
+@override final  bool requireNonAlphanumeric;
+@override final  bool requireUppercase;
+@override final  int requiredLength;
 
 /// Create a copy of PasswordPolicyDto
 /// with the given fields replaced by the non-null parameter values.
