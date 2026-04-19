@@ -15,9 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthenticateRequestDto {
 
- String get userNameOrEmailAddress; String get password;// PDF spec: Authenticate body uses `tenantName`, unlike IsTenantAvailable
-// and RegisterTenant which both use `tenancyName`. Live API returns 401
-// when `tenancyName` is sent here.
+ String get userNameOrEmailAddress; String get password;// Workiom's API expects `tenantName` here, unlike IsTenantAvailable and
+// RegisterTenant which both use `tenancyName`. Sending `tenancyName`
+// returns 401 from /api/TokenAuth/Authenticate.
 @JsonKey(name: 'tenantName') String get tenancyName;// ianaTimeZone goes in body (RegisterTenant uses ?timeZone= query param)
  String get ianaTimeZone; bool get rememberClient; String? get twoFactorVerificationCode; String? get captchaResponse; bool get singleSignIn; String? get returnUrl;
 /// Create a copy of AuthenticateRequestDto
@@ -226,9 +226,9 @@ class _AuthenticateRequestDto implements AuthenticateRequestDto {
 
 @override final  String userNameOrEmailAddress;
 @override final  String password;
-// PDF spec: Authenticate body uses `tenantName`, unlike IsTenantAvailable
-// and RegisterTenant which both use `tenancyName`. Live API returns 401
-// when `tenancyName` is sent here.
+// Workiom's API expects `tenantName` here, unlike IsTenantAvailable and
+// RegisterTenant which both use `tenancyName`. Sending `tenancyName`
+// returns 401 from /api/TokenAuth/Authenticate.
 @override@JsonKey(name: 'tenantName') final  String tenancyName;
 // ianaTimeZone goes in body (RegisterTenant uses ?timeZone= query param)
 @override final  String ianaTimeZone;

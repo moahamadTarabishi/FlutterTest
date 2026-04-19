@@ -9,9 +9,9 @@ abstract class AuthenticateRequestDto with _$AuthenticateRequestDto {
   const factory AuthenticateRequestDto({
     required String userNameOrEmailAddress,
     required String password,
-    // PDF spec: Authenticate body uses `tenantName`, unlike IsTenantAvailable
-    // and RegisterTenant which both use `tenancyName`. Live API returns 401
-    // when `tenancyName` is sent here.
+    // Workiom's API expects `tenantName` here, unlike IsTenantAvailable and
+    // RegisterTenant which both use `tenancyName`. Sending `tenancyName`
+    // returns 401 from /api/TokenAuth/Authenticate.
     @JsonKey(name: 'tenantName') required String tenancyName,
     // ianaTimeZone goes in body (RegisterTenant uses ?timeZone= query param)
     required String ianaTimeZone,

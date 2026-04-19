@@ -12,6 +12,10 @@ class Password extends ValueObject<String> {
   const Password.pure()
       : value = const Left(ValueFailure<String>.empty());
 
+  factory Password.signIn(String input) => input.isEmpty
+      ? const Password._(Left(ValueFailure<String>.empty()))
+      : Password._(Right(input));
+
   @override
   final Either<ValueFailure<String>, String> value;
 

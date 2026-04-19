@@ -172,7 +172,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get retry => 'إعادة المحاولة';
 
   @override
-  String get loginOutOfScope => 'تسجيل الدخول خارج نطاق هذا العرض التوضيحي.';
+  String get signInTitle => 'سجل الدخول إلى مساحة عملك';
+
+  @override
+  String get signInSubtitle => 'مرحبًا بعودتك!';
+
+  @override
+  String get signingIn => 'جارٍ تسجيل الدخول...';
+
+  @override
+  String get welcomeBack => 'مرحبًا بعودتك!';
+
+  @override
+  String get signInSuccessSubtitle => 'لقد سجلت الدخول إلى مساحة عمل ووركيوم.';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟';
+
+  @override
+  String get createOne => 'سجل الآن';
 
   @override
   String get emailLabel => 'البريد الإلكتروني';

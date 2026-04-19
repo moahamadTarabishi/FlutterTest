@@ -26,12 +26,12 @@ class _SplashPageState extends State<SplashPage> {
     if (!mounted) return;
 
     result.fold(
-      (_) => context.go(AppRoutes.welcome),
+      (_) => context.go(AppRoutes.login),
       (session) {
         if (session?.user != null) {
-          context.go(AppRoutes.signupSuccess);
+          context.go(AppRoutes.signInSuccess);
         } else {
-          context.go(AppRoutes.welcome);
+          context.go(AppRoutes.login);
         }
       },
     );

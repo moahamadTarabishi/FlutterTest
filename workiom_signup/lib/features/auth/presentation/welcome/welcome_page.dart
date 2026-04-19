@@ -5,6 +5,7 @@ import 'package:workiom_signup/core/gen/assets.gen.dart';
 import 'package:workiom_signup/core/l10n/generated/app_localizations.dart';
 import 'package:workiom_signup/core/router/app_routes.dart';
 import 'package:workiom_signup/core/widgets/app_footer.dart';
+import 'package:workiom_signup/core/widgets/app_icon.dart';
 import 'package:workiom_signup/core/widgets/app_language_switcher.dart';
 import 'package:workiom_signup/core/widgets/app_theme_switcher.dart';
 import 'package:workiom_signup/core/widgets/google_sign_in_button.dart';
@@ -18,10 +19,25 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 140,
+        leading: TextButton.icon(
+          onPressed: () => context.go(AppRoutes.login),
+          icon: AppIcon(
+            Assets.icons.icChevronLeft,
+            size: 18,
+            color: cs.primary,
+            matchTextDirection: true,
+          ),
+          label: Text(
+            l10n.signIn,
+            style: tt.labelLarge?.copyWith(color: cs.primary),
+          ),
+        ),
         actions: const [
           AppThemeSwitcher(),
           SizedBox(width: 12),

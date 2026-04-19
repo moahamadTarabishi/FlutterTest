@@ -173,7 +173,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Retry';
 
   @override
-  String get loginOutOfScope => 'Login is out of scope for this demo.';
+  String get signInTitle => 'Sign in to your workspace';
+
+  @override
+  String get signInSubtitle => 'Welcome back!';
+
+  @override
+  String get signingIn => 'Signing you in...';
+
+  @override
+  String get welcomeBack => 'Welcome back!';
+
+  @override
+  String get signInSuccessSubtitle =>
+      'You\'re signed in to your Workiom workspace.';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account?';
+
+  @override
+  String get createOne => 'Create one';
 
   @override
   String get emailLabel => 'Email';

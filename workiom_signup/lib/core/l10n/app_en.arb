@@ -158,8 +158,26 @@
   "retry": "Retry",
   "@retry": {},
 
-  "loginOutOfScope": "Login is out of scope for this demo.",
-  "@loginOutOfScope": {},
+  "signInTitle": "Sign in to your workspace",
+  "@signInTitle": {},
+
+  "signInSubtitle": "Welcome back!",
+  "@signInSubtitle": {},
+
+  "signingIn": "Signing you in...",
+  "@signingIn": {},
+
+  "welcomeBack": "Welcome back!",
+  "@welcomeBack": {},
+
+  "signInSuccessSubtitle": "You're signed in to your Workiom workspace.",
+  "@signInSuccessSubtitle": {},
+
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {},
+
+  "createOne": "Create one",
+  "@createOne": {},
 
   "emailLabel": "Email",
   "@emailLabel": {},

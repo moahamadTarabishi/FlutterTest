@@ -123,4 +123,23 @@ void main() {
       expect(withoutSpecial[PasswordRule.special], isFalse);
     });
   });
+
+  group('Password.signIn factory', () {
+    test('empty input is invalid with ValueFailureEmpty', () {
+      final p = Password.signIn('');
+      expect(p.isValid, isFalse);
+      p.value.fold(
+        (f) => expect(f, isA<ValueFailureEmpty<String>>()),
+        (_) => fail('expected failure'),
+      );
+    });
+
+    test('single character is valid (no policy enforced)', () {
+      expect(Password.signIn('a').isValid, isTrue);
+    });
+
+    test('typical password is valid regardless of complexity', () {
+      expect(Password.signIn('password').isValid, isTrue);
+    });
+  });
 }

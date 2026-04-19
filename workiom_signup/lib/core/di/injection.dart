@@ -19,6 +19,7 @@ import 'package:workiom_signup/features/auth/domain/usecases/register_and_authen
 import 'package:workiom_signup/features/auth/domain/usecases/register_tenant.dart';
 import 'package:workiom_signup/features/auth/infrastructure/datasources/auth_remote_datasource.dart';
 import 'package:workiom_signup/features/auth/infrastructure/repositories/auth_repository_impl.dart';
+import 'package:workiom_signup/features/auth/presentation/login/bloc/sign_in_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -83,6 +84,13 @@ void configureDependencies() {
         getPasswordPolicy: getIt(),
         checkTenantAvailable: getIt(),
         registerAndAuthenticate: getIt(),
+      ),
+    )
+    // BLoC — factory (fresh instance per /login shell)
+    ..registerFactory<SignInBloc>(
+      () => SignInBloc(
+        authenticate: getIt(),
+        getCurrentSession: getIt(),
       ),
     );
 }

@@ -404,11 +404,47 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get retry;
 
-  /// No description provided for @loginOutOfScope.
+  /// No description provided for @signInTitle.
   ///
   /// In en, this message translates to:
-  /// **'Login is out of scope for this demo.'**
-  String get loginOutOfScope;
+  /// **'Sign in to your workspace'**
+  String get signInTitle;
+
+  /// No description provided for @signInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back!'**
+  String get signInSubtitle;
+
+  /// No description provided for @signingIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing you in...'**
+  String get signingIn;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back!'**
+  String get welcomeBack;
+
+  /// No description provided for @signInSuccessSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re signed in to your Workiom workspace.'**
+  String get signInSuccessSubtitle;
+
+  /// No description provided for @dontHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get dontHaveAccount;
+
+  /// No description provided for @createOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Create one'**
+  String get createOne;
 
   /// No description provided for @emailLabel.
   ///

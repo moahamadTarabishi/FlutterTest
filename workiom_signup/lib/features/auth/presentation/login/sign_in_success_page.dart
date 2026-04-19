@@ -14,27 +14,24 @@ import 'package:workiom_signup/core/widgets/app_icon.dart';
 import 'package:workiom_signup/core/widgets/app_theme_switcher.dart';
 import 'package:workiom_signup/features/auth/domain/entities/user_session.dart';
 import 'package:workiom_signup/features/auth/domain/usecases/get_current_session.dart';
-import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
+import 'package:workiom_signup/features/auth/presentation/login/bloc/sign_in_bloc.dart';
 
-class SignUpSuccessPage extends StatefulWidget {
-  const SignUpSuccessPage({super.key});
+class SignInSuccessPage extends StatefulWidget {
+  const SignInSuccessPage({super.key});
 
   @override
-  State<SignUpSuccessPage> createState() => _SignUpSuccessPageState();
+  State<SignInSuccessPage> createState() => _SignInSuccessPageState();
 }
 
-class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
+class _SignInSuccessPageState extends State<SignInSuccessPage> {
   UserSession? _session;
 
   @override
   void initState() {
     super.initState();
-    // userSession is set by RegisterAndAuthenticate on the normal sign-up path.
-    // Fall back to a network fetch only for the splash-redirect path
-    // (freshly mounted BLoC, userSession is null).
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      final stateSession = context.read<SignUpBloc>().state.userSession;
+      final stateSession = context.read<SignInBloc>().state.userSession;
       if (stateSession != null) {
         setState(() => _session = stateSession);
       } else {
@@ -55,6 +52,7 @@ class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
   Future<void> _handleLogout() async {
     await getIt<SecureStorage>().clearAuthToken();
     if (!mounted) return;
+    context.read<SignInBloc>().add(const SignInEvent.reset());
     context.go(AppRoutes.login);
   }
 
@@ -79,24 +77,18 @@ class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: 24,
-                ),
+                padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
                 child: Column(
                   children: [
                     const SizedBox(height: 56),
-
-                    // Workiom logo hero
                     AppIcon(
                       Assets.icons.icWorkiom,
                       size: 48,
                       color: cs.primary,
                     ),
                     const SizedBox(height: 20),
-
-                    // Big title
                     Text(
-                      l10n.thankYouForChoosing,
+                      l10n.welcomeBack,
                       style: tt.headlineMedium?.copyWith(
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
@@ -105,18 +97,13 @@ class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
-
-                    // Subtitle
                     Text(
-                      l10n.successSubtitle,
+                      l10n.signInSuccessSubtitle,
                       style: tt.titleLarge,
                       textAlign: TextAlign.center,
                     ),
-
                     if (user != null) ...[
                       const SizedBox(height: 36),
-
-                      // Info card
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -166,18 +153,13 @@ class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
                         ),
                       ),
                     ],
-
                     const SizedBox(height: 32),
                   ],
                 ),
               ),
             ),
-
-            // Bottom actions
             Padding(
-              padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: 24,
-              ),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
               child: Column(
                 children: [
                   SizedBox(

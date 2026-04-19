@@ -2,7 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workiom_signup/core/di/injection.dart';
 import 'package:workiom_signup/core/router/app_routes.dart';
+import 'package:workiom_signup/features/auth/presentation/login/bloc/sign_in_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/login/login_page.dart';
+import 'package:workiom_signup/features/auth/presentation/login/sign_in_success_page.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/signup_email_password_page.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/signup_success_page.dart';
@@ -21,9 +23,22 @@ final appRouter = GoRouter(
       path: AppRoutes.welcome,
       builder: (_, _) => const WelcomePage(),
     ),
-    GoRoute(
-      path: AppRoutes.login,
-      builder: (_, _) => const LoginPage(),
+    // ShellRoute: same SignInBloc instance across /login and /login/success.
+    ShellRoute(
+      builder: (context, state, child) => BlocProvider(
+        create: (_) => getIt<SignInBloc>()..add(const SignInEvent.started()),
+        child: child,
+      ),
+      routes: [
+        GoRoute(
+          path: AppRoutes.login,
+          builder: (_, _) => const LoginPage(),
+        ),
+        GoRoute(
+          path: AppRoutes.signInSuccess,
+          builder: (_, _) => const SignInSuccessPage(),
+        ),
+      ],
     ),
     // ShellRoute: same SignUpBloc instance across all /signup/* children.
     ShellRoute(
