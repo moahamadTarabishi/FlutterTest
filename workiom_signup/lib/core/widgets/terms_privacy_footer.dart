@@ -7,11 +7,13 @@ class TermsPrivacyFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
     final base = tt.labelMedium;
     final link = base?.copyWith(
+      color: cs.primary,
       decoration: TextDecoration.underline,
-      decorationColor: base.color,
+      decorationColor: cs.primary,
     );
 
     return Padding(

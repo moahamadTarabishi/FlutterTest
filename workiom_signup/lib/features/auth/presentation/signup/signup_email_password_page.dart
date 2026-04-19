@@ -9,6 +9,7 @@ import 'package:workiom_signup/core/utils/value_failures.dart';
 import 'package:workiom_signup/core/widgets/app_footer.dart';
 import 'package:workiom_signup/core/widgets/app_icon.dart';
 import 'package:workiom_signup/core/widgets/app_text_field.dart';
+import 'package:workiom_signup/core/widgets/error_banner.dart';
 import 'package:workiom_signup/core/widgets/primary_button.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/widgets/password_rules_list.dart';
@@ -24,12 +25,16 @@ class SignUpEmailPasswordPage extends StatefulWidget {
 
 class _SignUpEmailPasswordPageState extends State<SignUpEmailPasswordPage> {
   final _emailController = TextEditingController();
+  final _emailFocus = FocusNode();
+  final _passwordFocus = FocusNode();
   String _rawPassword = '';
   bool _obscurePassword = true;
 
   @override
   void dispose() {
     _emailController.dispose();
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
     super.dispose();
   }
 
@@ -55,8 +60,12 @@ class _SignUpEmailPasswordPageState extends State<SignUpEmailPasswordPage> {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: AppIcon(Assets.icons.icChevronLeft, color: cs.primary),
-              onPressed: () => context.go(AppRoutes.welcome),
+              icon: AppIcon(
+                Assets.icons.icChevronLeft,
+                color: cs.primary,
+                matchTextDirection: true,
+              ),
+              onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
               alignment: Alignment.center,
             ),
@@ -65,112 +74,124 @@ class _SignUpEmailPasswordPageState extends State<SignUpEmailPasswordPage> {
             child: Column(
               children: [
                 if (state.bootFailed)
-                  Material(
-                    color: cs.errorContainer,
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(height: 12),
+                      ErrorBanner(message: l10n.errorLoadingConfig),
+                      Center(
+                        child: TextButton(
+                          onPressed: () => context
+                              .read<SignUpBloc>()
+                              .add(const SignUpEvent.started()),
+                          child: Text(l10n.retry),
+                        ),
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              l10n.errorLoadingConfig,
-                              style: TextStyle(color: cs.onErrorContainer),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () => context
-                                .read<SignUpBloc>()
-                                .add(const SignUpEvent.started()),
-                            child: Text(
-                              l10n.retry,
-                              style: TextStyle(color: cs.onErrorContainer),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    ],
                   ),
                 Expanded(
-                  child: SingleChildScrollView(
-                    padding:
-                        const EdgeInsetsDirectional.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 16),
-                        Text(l10n.enterStrongPassword,
-                            style: Theme.of(context).textTheme.headlineMedium),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(l10n.letsStartJourney,
-                                style: Theme.of(context).textTheme.titleLarge)
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                        AppTextField(
-                          label: l10n.yourWorkEmail,
-                          hintText: l10n.emailLabel,
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          prefixIcon: AppIcon(Assets.icons.icEmail, size: 16),
-                          controller: _emailController,
-                          errorText: emailError,
-                          suffix: IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            splashRadius: 20,
-                            icon: AppIcon(
-                              Assets.icons.icCloseCircle,
-                              size: 18,
-                              color: sem.textTertiary,
+                  child: AutofillGroup(
+                    child: SingleChildScrollView(
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 16),
+                          Text(
+                            l10n.enterStrongPassword,
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(l10n.letsStartJourney,
+                                  style: Theme.of(context).textTheme.titleLarge)
+                            ],
+                          ),
+                          const SizedBox(height: 30),
+                          AppTextField(
+                            label: l10n.yourWorkEmail,
+                            hintText: l10n.emailLabel,
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.next,
+                            autofillHints: const [AutofillHints.email],
+                            autocorrect: false,
+                            focusNode: _emailFocus,
+                            onSubmitted: (_) =>
+                                _passwordFocus.requestFocus(),
+                            prefixIcon: AppIcon(
+                              Assets.icons.icEmail,
+                              size: 16,
+                              color: cs.onSurfaceVariant,
                             ),
-                            onPressed: () {
-                              _emailController.clear();
+                            controller: _emailController,
+                            errorText: emailError,
+                            suffix: IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              splashRadius: 20,
+                              icon: AppIcon(
+                                Assets.icons.icCloseCircle,
+                                size: 18,
+                                color: sem.textTertiary,
+                              ),
+                              onPressed: () {
+                                _emailController.clear();
+                                context
+                                    .read<SignUpBloc>()
+                                    .add(const SignUpEvent.emailChanged(''));
+                              },
+                            ),
+                            onChanged: (v) => context
+                                .read<SignUpBloc>()
+                                .add(SignUpEvent.emailChanged(v)),
+                          ),
+                          const SizedBox(height: 24),
+                          AppTextField(
+                            label: l10n.yourPassword,
+                            hintText: l10n.passwordLabel,
+                            obscureText: _obscurePassword,
+                            textInputAction: TextInputAction.done,
+                            autofillHints: const [AutofillHints.newPassword],
+                            autocorrect: false,
+                            enableSuggestions: false,
+                            focusNode: _passwordFocus,
+                            onSubmitted: (_) {
+                              if (canProceed) {
+                                context.go(AppRoutes.signupWorkspace);
+                              }
+                            },
+                            prefixIcon: AppIcon(
+                              Assets.icons.icLock,
+                              size: 16,
+                              color: cs.onSurfaceVariant,
+                            ),
+                            suffix: IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              splashRadius: 20,
+                              icon: AppIcon(
+                                _obscurePassword
+                                    ? Assets.icons.icEye
+                                    : Assets.icons.icEyeOff,
+                                size: 20,
+                                color: sem.textTertiary,
+                              ),
+                              onPressed: () => setState(
+                                () => _obscurePassword = !_obscurePassword,
+                              ),
+                            ),
+                            onChanged: (v) {
+                              setState(() => _rawPassword = v);
                               context
                                   .read<SignUpBloc>()
-                                  .add(const SignUpEvent.emailChanged(''));
+                                  .add(SignUpEvent.passwordChanged(v));
                             },
                           ),
-                          onChanged: (v) => context
-                              .read<SignUpBloc>()
-                              .add(SignUpEvent.emailChanged(v)),
-                        ),
-                        const SizedBox(height: 24),
-                        AppTextField(
-                          label: l10n.yourPassword,
-                          hintText: l10n.passwordLabel,
-                          obscureText: _obscurePassword,
-                          textInputAction: TextInputAction.done,
-                          prefixIcon: AppIcon(Assets.icons.icLock, size: 16),
-                          suffix: IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            splashRadius: 20,
-                            icon: AppIcon(
-                              _obscurePassword
-                                  ? Assets.icons.icEye
-                                  : Assets.icons.icEyeOff,
-                              size: 20,
-                              color: sem.textTertiary,
-                            ),
-                            onPressed: () => setState(
-                              () => _obscurePassword = !_obscurePassword,
-                            ),
-                          ),
-                          onChanged: (v) {
-                            setState(() => _rawPassword = v);
-                            context
-                                .read<SignUpBloc>()
-                                .add(SignUpEvent.passwordChanged(v));
-                          },
-                        ),
                         if (policy != null) ...[
                           const SizedBox(height: 30),
                           PasswordStrengthBar(
@@ -182,6 +203,7 @@ class _SignUpEmailPasswordPageState extends State<SignUpEmailPasswordPage> {
                       ],
                     ),
                   ),
+                ),
                 ),
                 Padding(
                   padding:

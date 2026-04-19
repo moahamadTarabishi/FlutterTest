@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "flutter_gen",
+      "type": "shell",
+      "command": "dart",
+      "args": [
+        "run",
+        "build_runner",
+        "build",
+        "--delete-conflicting-outputs"
+      ],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "flutter_gen_watch",
+      "type": "shell",
+      "command": "dart",
+      "args": [
+        "run",
+        "build_runner",
+        "watch",
+        "--delete-conflicting-outputs"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "skills": {
+    "material-design": {
+      "source": "openclaw/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openclaw/skills.git",
+      "skillPath": "skills/bingfoon/material-design/SKILL.md",
+      "skillFolderHash": "6cfc6e7f1b1ab6e4ebcdfc5760e76f2c60f749e1",
+      "installedAt": "2026-04-18T14:40:57.652Z",
+      "updatedAt": "2026-04-18T14:40:57.652Z"
+    },
+    "Animate": {
+      "source": "openclaw/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openclaw/skills.git",
+      "skillPath": "skills/ivangdavila/animate/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-18T16:23:09.770Z",
+      "updatedAt": "2026-04-18T16:23:09.770Z"
+    },
+    "flutter-architecture": {
+      "source": "openclaw/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openclaw/skills.git",
+      "skillPath": "skills/pipedog/flutter-architecture/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-19T05:42:24.232Z",
+      "updatedAt": "2026-04-19T05:42:24.232Z"
+    }
+  },
+  "dismissed": {}
+}

@@ -19,16 +19,16 @@ void main() {
       expect(PersonName('A1ex').isValid, isFalse);
     });
 
-    test('hyphen rejected', () {
-      expect(PersonName('Jean-Luc').isValid, isFalse);
+    test('hyphen allowed (Anne-Marie)', () {
+      expect(PersonName('Anne-Marie').isValid, isTrue);
     });
 
-    test('apostrophe rejected', () {
-      expect(PersonName("O'Brien").isValid, isFalse);
+    test("apostrophe allowed (O'Brien)", () {
+      expect(PersonName("O'Brien").isValid, isTrue);
     });
 
-    test('spaces rejected', () {
-      expect(PersonName('John Doe').isValid, isFalse);
+    test('spaces allowed (Mary Ann)', () {
+      expect(PersonName('Mary Ann').isValid, isTrue);
     });
 
     test('trims whitespace before validation', () {

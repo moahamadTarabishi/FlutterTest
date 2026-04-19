@@ -22,9 +22,10 @@ abstract final class AppColors {
 
   // Semantic
   static const error = Color(0xFFEF4444);
+  static const errorBanner = Color(0xFFD63B70);
   static const white = Color(0xFFFFFFFF);
 
-  // Dark mode (not Figma-sourced — approximation only)
+  // Dark mode
   static const darkBackground = Color(0xFF0F0F1A);
   static const darkSurface = Color(0xFF1A1A2E);
   static const darkTextPrimary = Color(0xFFF5F5F7);

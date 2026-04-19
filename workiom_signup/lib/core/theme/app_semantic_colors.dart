@@ -13,6 +13,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     required this.strengthStrong,
     required this.iconMuted,
     required this.ruleFailed,
+    required this.inputUnderline,
+    required this.googleButtonSurface,
+    required this.googleButtonOnSurface,
+    required this.errorBanner,
   });
 
   static const light = AppSemanticColors(
@@ -25,10 +29,14 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     strengthStrong: AppColors.strengthStrong,
     iconMuted: AppColors.iconMuted,
     ruleFailed: Color(0xFFFF776E),
+    inputUnderline: AppColors.underline,
+    googleButtonSurface: Color(0xFFFFFFFF),
+    googleButtonOnSurface: Color(0xFF1F1F1F),
+    errorBanner: AppColors.errorBanner,
   );
 
   static const dark = AppSemanticColors(
-    primaryDisabled: AppColors.primaryDisabled,
+    primaryDisabled: Color(0xFF3A3A4E),
     arrowBox: Color(0xFF3A3A4A),
     textTertiary: Color(0xFF9CA3AF),
     textWarning: Color(0xFF9CA3AF),
@@ -37,6 +45,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     strengthStrong: AppColors.strengthStrong,
     iconMuted: Color(0xFF6B7280),
     ruleFailed: Color(0xFFFF776E),
+    inputUnderline: Color(0xFF3F3F55),
+    googleButtonSurface: Color(0xFFFFFFFF),
+    googleButtonOnSurface: Color(0xFF1F1F1F),
+    errorBanner: AppColors.errorBanner,
   );
 
   final Color primaryDisabled;
@@ -48,6 +60,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
   final Color strengthStrong;
   final Color iconMuted;
   final Color ruleFailed;
+  final Color inputUnderline;
+  final Color googleButtonSurface;
+  final Color googleButtonOnSurface;
+  final Color errorBanner;
 
   @override
   AppSemanticColors copyWith({
@@ -60,6 +76,10 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
     Color? strengthStrong,
     Color? iconMuted,
     Color? ruleFailed,
+    Color? inputUnderline,
+    Color? googleButtonSurface,
+    Color? googleButtonOnSurface,
+    Color? errorBanner,
   }) =>
       AppSemanticColors(
         primaryDisabled: primaryDisabled ?? this.primaryDisabled,
@@ -71,6 +91,11 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
         strengthStrong: strengthStrong ?? this.strengthStrong,
         iconMuted: iconMuted ?? this.iconMuted,
         ruleFailed: ruleFailed ?? this.ruleFailed,
+        inputUnderline: inputUnderline ?? this.inputUnderline,
+        googleButtonSurface: googleButtonSurface ?? this.googleButtonSurface,
+        googleButtonOnSurface:
+            googleButtonOnSurface ?? this.googleButtonOnSurface,
+        errorBanner: errorBanner ?? this.errorBanner,
       );
 
   @override
@@ -86,6 +111,12 @@ class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
       strengthStrong: Color.lerp(strengthStrong, other.strengthStrong, t)!,
       iconMuted: Color.lerp(iconMuted, other.iconMuted, t)!,
       ruleFailed: Color.lerp(ruleFailed, other.ruleFailed, t)!,
+      inputUnderline: Color.lerp(inputUnderline, other.inputUnderline, t)!,
+      googleButtonSurface:
+          Color.lerp(googleButtonSurface, other.googleButtonSurface, t)!,
+      googleButtonOnSurface:
+          Color.lerp(googleButtonOnSurface, other.googleButtonOnSurface, t)!,
+      errorBanner: Color.lerp(errorBanner, other.errorBanner, t)!,
     );
   }
 }

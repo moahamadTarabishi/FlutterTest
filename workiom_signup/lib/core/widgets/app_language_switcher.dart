@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workiom_signup/core/gen/assets.gen.dart';
 import 'package:workiom_signup/core/l10n/generated/app_localizations.dart';
 import 'package:workiom_signup/core/l10n/locale_cubit.dart';
-import 'package:workiom_signup/core/theme/app_colors.dart';
 import 'package:workiom_signup/core/widgets/app_icon.dart';
 
 class AppLanguageSwitcher extends StatelessWidget {
@@ -11,6 +10,7 @@ class AppLanguageSwitcher extends StatelessWidget {
 
   Future<void> _showDropdown(BuildContext context) async {
     final cubit = context.read<LocaleCubit>();
+    final cs = Theme.of(context).colorScheme;
     final current = cubit.state.languageCode;
     final renderBox = context.findRenderObject()! as RenderBox;
     final offset = renderBox.localToGlobal(Offset.zero);
@@ -18,7 +18,7 @@ class AppLanguageSwitcher extends StatelessWidget {
 
     final selected = await showMenu<String>(
       context: context,
-      color: AppColors.surface,
+      color: cs.surface,
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       position: RelativeRect.fromLTRB(
@@ -45,6 +45,7 @@ class AppLanguageSwitcher extends StatelessWidget {
     required String current,
   }) {
     final isSelected = code == current;
+    final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
 
     return PopupMenuItem<String>(
@@ -55,18 +56,16 @@ class AppLanguageSwitcher extends StatelessWidget {
           Text(
             label,
             style: tt.bodySmall?.copyWith(
-              color: isSelected
-                  ? AppColors.primary
-                  : AppColors.textPrimary,
+              color: isSelected ? cs.primary : cs.onSurface,
               fontWeight:
                   isSelected ? FontWeight.w600 : FontWeight.normal,
             ),
           ),
           if (isSelected)
-            const Icon(
+            Icon(
               Icons.check,
               size: 14,
-              color: AppColors.primary,
+              color: cs.primary,
             ),
         ],
       ),
@@ -76,6 +75,7 @@ class AppLanguageSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
     final currentCode =
         context.watch<LocaleCubit>().state.languageCode;
@@ -89,7 +89,7 @@ class AppLanguageSwitcher extends StatelessWidget {
           AppIcon(
             Assets.icons.icGlobe,
             size: 14,
-            color: AppColors.textSecondary,
+            color: cs.onSurfaceVariant,
           ),
           const SizedBox(width: 8),
           Text(label, style: tt.bodySmall),
@@ -99,7 +99,7 @@ class AppLanguageSwitcher extends StatelessWidget {
             child: AppIcon(
               Assets.icons.icChevronDown,
               size: 14,
-              color: AppColors.textSecondary,
+              color: cs.onSurfaceVariant,
             ),
           ),
         ],

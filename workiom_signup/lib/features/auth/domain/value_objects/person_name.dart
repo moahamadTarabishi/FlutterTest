@@ -16,7 +16,7 @@ class PersonName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static final _regex = RegExp(r'^\p{L}+$', unicode: true);
+  static final _regex = RegExp(r"^[\p{L}][\p{L}\s'\-]*$", unicode: true);
 
   static Either<ValueFailure<String>, String> _validate(String input) {
     if (input.isEmpty) return const Left(ValueFailure.empty());

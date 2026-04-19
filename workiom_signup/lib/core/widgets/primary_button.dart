@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:workiom_signup/core/gen/assets.gen.dart';
-import 'package:workiom_signup/core/theme/app_colors.dart';
 import 'package:workiom_signup/core/theme/app_semantic_colors.dart';
 import 'package:workiom_signup/core/widgets/app_icon.dart';
 
@@ -28,7 +27,7 @@ class PrimaryButton extends StatelessWidget {
 
     final isEnabled = onPressed != null && !isLoading;
     final bgColor = fillColor ?? (isEnabled ? cs.primary : sem.primaryDisabled);
-    final textColor = labelColor ?? AppColors.white;
+    final textColor = labelColor ?? cs.onPrimary;
 
     return GestureDetector(
       onTap: isEnabled ? onPressed : null,
@@ -68,7 +67,8 @@ class PrimaryButton extends StatelessWidget {
               child: Center(
                 child: AppIcon(
                   Assets.icons.icReturnArrow,
-                  size: 16
+                  size: 16,
+                  color: textColor,
                 ),
               ),
             ),

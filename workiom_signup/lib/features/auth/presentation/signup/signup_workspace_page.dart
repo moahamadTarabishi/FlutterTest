@@ -9,13 +9,31 @@ import 'package:workiom_signup/core/utils/value_failures.dart';
 import 'package:workiom_signup/core/widgets/app_footer.dart';
 import 'package:workiom_signup/core/widgets/app_icon.dart';
 import 'package:workiom_signup/core/widgets/app_text_field.dart';
+import 'package:workiom_signup/core/widgets/error_banner.dart';
 import 'package:workiom_signup/core/widgets/primary_button.dart';
 import 'package:workiom_signup/features/auth/domain/failures/auth_failure.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 import 'package:workiom_signup/features/auth/presentation/signup/widgets/tenant_availability_indicator.dart';
 
-class SignUpWorkspacePage extends StatelessWidget {
+class SignUpWorkspacePage extends StatefulWidget {
   const SignUpWorkspacePage({super.key});
+
+  @override
+  State<SignUpWorkspacePage> createState() => _SignUpWorkspacePageState();
+}
+
+class _SignUpWorkspacePageState extends State<SignUpWorkspacePage> {
+  final _workspaceFocus = FocusNode();
+  final _firstFocus = FocusNode();
+  final _lastFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _workspaceFocus.dispose();
+    _firstFocus.dispose();
+    _lastFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +47,6 @@ class SignUpWorkspacePage extends StatelessWidget {
       listener: (context, state) {
         if (state.submissionStatus == SubmissionStatus.success) {
           context.go(AppRoutes.signupSuccess);
-        } else if (state.submissionStatus == SubmissionStatus.failure) {
-          final msg = _errorMessage(state, l10n);
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(msg)));
         }
       },
       child: BlocBuilder<SignUpBloc, SignUpState>(
@@ -71,7 +85,11 @@ class SignUpWorkspacePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                icon: AppIcon(Assets.icons.icChevronLeft, color: cs.primary),
+                icon: AppIcon(
+                  Assets.icons.icChevronLeft,
+                  color: cs.primary,
+                  matchTextDirection: true,
+                ),
                 onPressed: () => context.go(AppRoutes.signupEmailPassword),
                 padding: EdgeInsets.zero,
                 alignment: Alignment.center,
@@ -80,74 +98,109 @@ class SignUpWorkspacePage extends StatelessWidget {
             body: SafeArea(
               child: Column(
                 children: [
+                  if (state.submissionStatus == SubmissionStatus.failure) ...[
+                    const SizedBox(height: 12),
+                    ErrorBanner(message: _errorMessage(state, l10n)),
+                  ],
                   Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                          horizontal: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 16),
-                          Text(l10n.enterCompanyName, style: tt.headlineMedium),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Text(l10n.letsStartJourney, style: tt.titleLarge)
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          // Workspace field
-                          AppTextField(
-                            label: l10n.yourCompanyOrTeamName,
-                            hintText: l10n.workspaceNameHint,
-                            keyboardType: TextInputType.url,
-                            textInputAction: TextInputAction.next,
-                            prefixIcon:
-                                AppIcon(Assets.icons.icGroup, size: 16),
-                            suffixText: '.workiom.com',
-                            errorText: tenantError,
-                            onChanged: (v) => context
-                                .read<SignUpBloc>()
-                                .add(SignUpEvent.tenantNameChanged(v)),
-                          ),
-                          const SizedBox(height: 8),
-                          TenantAvailabilityIndicator(
-                            availability: state.tenantAvailability,
-                            tenantName: state.tenantName.value
-                                .getOrElse(() => ''),
-                          ),
-                          const SizedBox(height: 24),
-                          // First name field
-                          AppTextField(
-                            label: l10n.yourFirstName,
-                            hintText: l10n.enterFirstName,
-                            keyboardType: TextInputType.name,
-                            textInputAction: TextInputAction.next,
-                            prefixIcon:
-                                AppIcon(Assets.icons.icPerson, size: 16),
-                            errorText: firstError,
-                            onChanged: (v) => context
-                                .read<SignUpBloc>()
-                                .add(SignUpEvent.firstNameChanged(v)),
-                          ),
-                          const SizedBox(height: 24),
-                          // Last name field
-                          AppTextField(
-                            label: l10n.yourLastName,
-                            hintText: l10n.enterLastName,
-                            keyboardType: TextInputType.name,
-                            textInputAction: TextInputAction.done,
-                            prefixIcon:
-                                AppIcon(Assets.icons.icPerson, size: 16),
-                            errorText: lastError,
-                            onChanged: (v) => context
-                                .read<SignUpBloc>()
-                                .add(SignUpEvent.lastNameChanged(v)),
-                          ),
-                        ],
+                    child: AutofillGroup(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 16),
+                            Text(l10n.enterCompanyName,
+                                style: tt.headlineMedium),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Text(l10n.letsStartJourney,
+                                    style: tt.titleLarge),
+                              ],
+                            ),
+                            const SizedBox(height: 30),
+                            // Workspace field
+                            AppTextField(
+                              label: l10n.yourCompanyOrTeamName,
+                              hintText: l10n.workspaceNameHint,
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                              autocorrect: false,
+                              focusNode: _workspaceFocus,
+                              onSubmitted: (_) =>
+                                  _firstFocus.requestFocus(),
+                              prefixIcon: AppIcon(
+                                Assets.icons.icGroup,
+                                size: 16,
+                                color: cs.onSurfaceVariant,
+                              ),
+                              suffixText: '.workiom.com',
+                              errorText: tenantError,
+                              onChanged: (v) => context
+                                  .read<SignUpBloc>()
+                                  .add(SignUpEvent.tenantNameChanged(v)),
+                            ),
+                            const SizedBox(height: 8),
+                            TenantAvailabilityIndicator(
+                              availability: state.tenantAvailability,
+                              tenantName: state.tenantName.value
+                                  .getOrElse(() => ''),
+                            ),
+                            const SizedBox(height: 24),
+                            // First name field
+                            AppTextField(
+                              label: l10n.yourFirstName,
+                              hintText: l10n.enterFirstName,
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.next,
+                              autofillHints: const [AutofillHints.givenName],
+                              textCapitalization: TextCapitalization.words,
+                              focusNode: _firstFocus,
+                              onSubmitted: (_) => _lastFocus.requestFocus(),
+                              prefixIcon: AppIcon(
+                                Assets.icons.icPerson,
+                                size: 16,
+                                color: cs.onSurfaceVariant,
+                              ),
+                              errorText: firstError,
+                              onChanged: (v) => context
+                                  .read<SignUpBloc>()
+                                  .add(SignUpEvent.firstNameChanged(v)),
+                            ),
+                            const SizedBox(height: 24),
+                            // Last name field
+                            AppTextField(
+                              label: l10n.yourLastName,
+                              hintText: l10n.enterLastName,
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.done,
+                              autofillHints: const [AutofillHints.familyName],
+                              textCapitalization: TextCapitalization.words,
+                              focusNode: _lastFocus,
+                              onSubmitted: (_) {
+                                if (canSubmit) {
+                                  context.read<SignUpBloc>().add(
+                                        const SignUpEvent.submitted(),
+                                      );
+                                }
+                              },
+                              prefixIcon: AppIcon(
+                                Assets.icons.icPerson,
+                                size: 16,
+                                color: cs.onSurfaceVariant,
+                              ),
+                              errorText: lastError,
+                              onChanged: (v) => context
+                                  .read<SignUpBloc>()
+                                  .add(SignUpEvent.lastNameChanged(v)),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

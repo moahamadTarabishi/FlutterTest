@@ -6,6 +6,7 @@ class SecureStorage {
   final FlutterSecureStorage _storage;
 
   static const _tokenKey = 'auth_token';
+  static const _themeModeKey = 'theme_mode';
 
   Future<String?> readAuthToken() => _storage.read(key: _tokenKey);
 
@@ -18,4 +19,9 @@ class SecureStorage {
     final token = await _storage.read(key: _tokenKey);
     return token != null && token.isNotEmpty;
   }
+
+  Future<String?> readThemeMode() => _storage.read(key: _themeModeKey);
+
+  Future<void> writeThemeMode(String modeName) =>
+      _storage.write(key: _themeModeKey, value: modeName);
 }

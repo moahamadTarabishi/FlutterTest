@@ -18,7 +18,11 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: AppIcon(Assets.icons.icChevronLeft, color: cs.primary),
+          icon: AppIcon(
+            Assets.icons.icChevronLeft,
+            color: cs.primary,
+            matchTextDirection: true,
+          ),
           onPressed: () => context.go(AppRoutes.welcome),
           padding: EdgeInsets.zero,
           alignment: Alignment.center,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workiom_signup/core/gen/assets.gen.dart';
 import 'package:workiom_signup/core/l10n/generated/app_localizations.dart';
-import 'package:workiom_signup/core/theme/app_colors.dart';
+import 'package:workiom_signup/core/theme/app_semantic_colors.dart';
 import 'package:workiom_signup/core/widgets/app_icon.dart';
 
 class GoogleSignInButton extends StatelessWidget {
@@ -12,6 +12,7 @@ class GoogleSignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final cs = Theme.of(context).colorScheme;
+    final sem = Theme.of(context).extension<AppSemanticColors>()!;
     final tt = Theme.of(context).textTheme;
 
     return GestureDetector(
@@ -23,8 +24,9 @@ class GoogleSignInButton extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.strengthTrack, // #F4F4F4
+                color: sem.googleButtonSurface,
                 borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: cs.outline),
               ),
             ),
             Align(
@@ -39,7 +41,9 @@ class GoogleSignInButton extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     l10n.continueWithGoogle,
-                    style: tt.labelLarge?.copyWith(color: cs.onSurface),
+                    style: tt.labelLarge?.copyWith(
+                      color: sem.googleButtonOnSurface,
+                    ),
                   ),
                 ],
               ),
@@ -52,7 +56,7 @@ class GoogleSignInButton extends StatelessWidget {
                 child: AppIcon(
                   Assets.icons.icArrowRight,
                   size: 16,
-                  color: AppColors.white,
+                  color: sem.googleButtonOnSurface,
                 ),
               ),
             ),

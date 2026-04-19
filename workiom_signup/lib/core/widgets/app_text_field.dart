@@ -17,6 +17,12 @@ class AppTextField extends StatelessWidget {
     this.controller,
     this.autofocus = false,
     this.enabled = true,
+    this.focusNode,
+    this.onSubmitted,
+    this.autofillHints,
+    this.autocorrect = true,
+    this.enableSuggestions = true,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   final String label;
@@ -32,6 +38,12 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool autofocus;
   final bool enabled;
+  final FocusNode? focusNode;
+  final ValueChanged<String>? onSubmitted;
+  final Iterable<String>? autofillHints;
+  final bool autocorrect;
+  final bool enableSuggestions;
+  final TextCapitalization textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +64,12 @@ class AppTextField extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           onChanged: onChanged,
+          focusNode: focusNode,
+          onSubmitted: onSubmitted,
+          autofillHints: autofillHints,
+          autocorrect: autocorrect,
+          enableSuggestions: enableSuggestions,
+          textCapitalization: textCapitalization,
           style: tt.bodyLarge,
           decoration: InputDecoration(
             hintText: hintText,

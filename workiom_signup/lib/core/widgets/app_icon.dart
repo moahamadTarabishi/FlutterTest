@@ -8,12 +8,14 @@ class AppIcon extends StatelessWidget {
     this.size = 24,
     this.color,
     this.semanticsLabel,
+    this.matchTextDirection = false,
   });
 
   final String assetPath;
   final double size;
   final Color? color;
   final String? semanticsLabel;
+  final bool matchTextDirection;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class AppIcon extends StatelessWidget {
           : null,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: semanticsLabel == null,
+      matchTextDirection: matchTextDirection,
     );
   }
 }

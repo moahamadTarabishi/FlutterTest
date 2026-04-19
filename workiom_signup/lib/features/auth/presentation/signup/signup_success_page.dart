@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workiom_signup/core/di/injection.dart';
 import 'package:workiom_signup/core/gen/assets.gen.dart';
@@ -10,8 +11,10 @@ import 'package:workiom_signup/core/storage/secure_storage.dart';
 import 'package:workiom_signup/core/theme/app_semantic_colors.dart';
 import 'package:workiom_signup/core/widgets/app_footer.dart';
 import 'package:workiom_signup/core/widgets/app_icon.dart';
+import 'package:workiom_signup/core/widgets/app_theme_switcher.dart';
 import 'package:workiom_signup/features/auth/domain/entities/user_session.dart';
 import 'package:workiom_signup/features/auth/domain/usecases/get_current_session.dart';
+import 'package:workiom_signup/features/auth/presentation/signup/bloc/signup_bloc.dart';
 
 class SignUpSuccessPage extends StatefulWidget {
   const SignUpSuccessPage({super.key});
@@ -26,7 +29,18 @@ class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
   @override
   void initState() {
     super.initState();
-    unawaited(_loadSession());
+    // userSession is set by RegisterAndAuthenticate on the normal sign-up path.
+    // Fall back to a network fetch only for the splash-redirect path
+    // (freshly mounted BLoC, userSession is null).
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final stateSession = context.read<SignUpBloc>().state.userSession;
+      if (stateSession != null) {
+        setState(() => _session = stateSession);
+      } else {
+        unawaited(_loadSession());
+      }
+    });
   }
 
   Future<void> _loadSession() async {
@@ -54,6 +68,12 @@ class _SignUpSuccessPageState extends State<SignUpSuccessPage> {
     final tenant = _session?.tenant;
 
     return Scaffold(
+      appBar: AppBar(
+        actions: const [
+          AppThemeSwitcher(),
+          SizedBox(width: 12),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [

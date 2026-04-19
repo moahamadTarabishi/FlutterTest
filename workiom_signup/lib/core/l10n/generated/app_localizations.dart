@@ -143,7 +143,7 @@ abstract class AppLocalizations {
   /// No description provided for @letsStartJourney.
   ///
   /// In en, this message translates to:
-  /// **'Let\'s start an amazing journey! 👋'**
+  /// **'Let\'s start an amazing journey!'**
   String get letsStartJourney;
 
   /// No description provided for @bySigningUp.
@@ -404,41 +404,11 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get retry;
 
-  /// No description provided for @back.
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get back;
-
-  /// No description provided for @welcomeTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome to Workiom'**
-  String get welcomeTitle;
-
-  /// No description provided for @welcomeSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'The all-in-one platform to organize your work and collaborate with your team.'**
-  String get welcomeSubtitle;
-
-  /// No description provided for @loginSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your credentials to access your workspace.'**
-  String get loginSubtitle;
-
   /// No description provided for @loginOutOfScope.
   ///
   /// In en, this message translates to:
   /// **'Login is out of scope for this demo.'**
   String get loginOutOfScope;
-
-  /// No description provided for @nextStep.
-  ///
-  /// In en, this message translates to:
-  /// **'Next'**
-  String get nextStep;
 
   /// No description provided for @emailLabel.
   ///
@@ -457,24 +427,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Workspace URL'**
   String get workspaceLabel;
-
-  /// No description provided for @firstNameLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'First name'**
-  String get firstNameLabel;
-
-  /// No description provided for @lastNameLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Last name'**
-  String get lastNameLabel;
-
-  /// No description provided for @successTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'You\'re all set!'**
-  String get successTitle;
 
   /// No description provided for @successSubtitle.
   ///

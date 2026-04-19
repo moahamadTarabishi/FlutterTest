@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "workiom_signup (debug)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "preLaunchTask": "flutter_gen"
+    },
+    {
+      "name": "workiom_signup (profile)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "preLaunchTask": "flutter_gen"
+    },
+    {
+      "name": "workiom_signup (release)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "preLaunchTask": "flutter_gen"
+    }
+  ]
+}

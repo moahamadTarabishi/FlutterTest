@@ -8,6 +8,7 @@ import 'package:workiom_signup/core/network/dio_client.dart';
 import 'package:workiom_signup/core/network/interceptors/auth_interceptor.dart';
 import 'package:workiom_signup/core/network/interceptors/error_interceptor.dart';
 import 'package:workiom_signup/core/storage/secure_storage.dart';
+import 'package:workiom_signup/core/theme/cubit/theme_cubit.dart';
 import 'package:workiom_signup/features/auth/domain/repositories/auth_repository.dart';
 import 'package:workiom_signup/features/auth/domain/usecases/authenticate.dart';
 import 'package:workiom_signup/features/auth/domain/usecases/check_tenant_available.dart';
@@ -71,6 +72,8 @@ void configureDependencies() {
         getCurrentSession: getIt(),
       ),
     )
+    // Theme — singleton for app lifetime
+    ..registerLazySingleton<ThemeCubit>(() => ThemeCubit(getIt()))
     // Locale — singleton for app lifetime
     ..registerLazySingleton<LocaleCubit>(LocaleCubit.new)
     // BLoC — factory (fresh instance per /signup shell)
